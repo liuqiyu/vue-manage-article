@@ -1,0 +1,48 @@
+.yus-admin {
+  .hideMenu {
+    .yus-menu {
+      width: 64px !important;
+    }
+
+    .el-menu-item {
+      .el-tooltip {
+        padding: 0 !important;
+
+        >.icon {
+          margin-left: 20px;
+        }
+      }
+    }
+
+    .el-submenu>.el-submenu__title {
+      padding: 0 !important;
+
+      >.icon {
+        margin-left: 20px;
+        margin-right: 16px;
+      }
+
+      >span {
+        height: 0;
+        width: 0;
+        overflow: hidden;
+        visibility: hidden;
+        // display: inline-block;
+      }
+
+      >.el-submenu__icon-arrow {
+        display: none;
+      }
+    }
+  }
+
+  .sidebar-container {
+    .el-menu {
+      border-right: none;
+    }
+
+    .icon {
+      margin-right: 16px;
+    }
+  }
+}

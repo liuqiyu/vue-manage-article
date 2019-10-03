@@ -1,0 +1,58 @@
+{
+  "name": "vue-admin-pro",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "vue-cli-service serve",
+    "build": "vue-cli-service build",
+    "build:dev": "vue-cli-service build --mode development",
+    "build:sit": "vue-cli-service build --mode sit",
+    "prod": "node vue.prod.js",
+    "report": "vue-cli-service build --report",
+    "dll": "webpack -p --progress --config ./webpack.dll.conf.js",
+    "lint": "vue-cli-service lint"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  },
+  "lint-staged": {
+    "src/**/*.{js,vue}": [
+      "eslint --fix",
+      "git add"
+    ]
+  },
+  "dependencies": {
+    "@babel/polyfill": "^7.6.0",
+    "axios": "^0.18.0",
+    "echarts": "^4.2.1",
+    "element-ui": "^2.8.2",
+    "moment": "^2.24.0",
+    "nprogress": "^0.2.0",
+    "screenfull": "^4.2.1",
+    "vue": "^2.6.6",
+    "vue-count-to": "^1.0.13",
+    "vue-router": "^3.0.1",
+    "vuex": "^3.0.1"
+  },
+  "devDependencies": {
+    "@vue/cli-plugin-babel": "^3.5.0",
+    "@vue/cli-plugin-eslint": "^3.5.0",
+    "@vue/cli-service": "^3.5.0",
+    "@vue/eslint-config-standard": "^4.0.0",
+    "babel-eslint": "^10.0.1",
+    "babel-polyfill": "^6.26.0",
+    "clean-webpack-plugin": "^3.0.0",
+    "eslint": "^5.8.0",
+    "eslint-plugin-vue": "^5.0.0",
+    "husky": "^3.0.5",
+    "lint-staged": "^9.2.5",
+    "mockjs": "^1.0.1-beta3",
+    "node-sass": "^4.9.0",
+    "sass-loader": "^7.1.0",
+    "vue-template-compiler": "^2.5.21",
+    "webpack": "^4.39.1",
+    "webpack-cli": "^3.3.6"
+  }
+}
