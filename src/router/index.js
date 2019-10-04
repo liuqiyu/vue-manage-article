@@ -3,6 +3,7 @@ import Router from 'vue-router'
 import Layout from './../views/layout'
 import store from './../store'
 import { getRoutes } from './../utils/router'
+import menuSort from './../utils/menu-sort'
 import login from './../views/login'
 
 Vue.use(Router)
@@ -11,6 +12,16 @@ const routerModule = getRoutes(
   require.context('./', false, /\.js$/),
   './index.js'
 )
+
+const menuRouters = []
+
+Object.keys(menuSort).forEach(item => {
+  routerModule.forEach(v => {
+    if (menuSort[item] === v.meta.title) {
+      menuRouters.push(v)
+    }
+  })
+})
 
 export const layoutRoutes = [
   {
@@ -31,9 +42,10 @@ export const layoutRoutes = [
       }
     ]
   },
-  ...routerModule
+  ...menuRouters
 ]
 
+console.log(layoutRoutes)
 store.commit('router/SET_ROUTER', layoutRoutes)
 
 const routes = [
