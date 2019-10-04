@@ -71,7 +71,7 @@ export default {
   },
   methods: {
     isActive (route) {
-      return route.path === this.$route.path || route.path === this.$route.meta.activeMenu
+      return route.path === this.$route.path || route.path === this.$route.meta.activeMenu || route.meta.activeMenu === this.$route.meta.activeMenu
     },
     initTags () {
       const affixTags = this.filterAffixTags(this.routes)
@@ -115,7 +115,7 @@ export default {
             this.$refs.scrollPane.moveToTarget(tag)
             // when query is different then update
             if (tag.to.fullPath !== this.$route.fullPath) {
-              this.$store.dispatch('updateVisitedView', this.$route)
+              this.$store.dispatch('tagsView/updateVisitedView', this.$route)
             }
             break
           }

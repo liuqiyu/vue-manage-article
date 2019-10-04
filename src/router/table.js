@@ -40,7 +40,7 @@ export default {
       meta: {
         noMenu: true,
         activeMenu: '/table/page',
-        title: '详情表格-新增'
+        title: '页面-新增'
       }
     },
     {
@@ -51,7 +51,7 @@ export default {
       meta: {
         noMenu: true,
         activeMenu: '/table/page',
-        title: '详情表格-详情'
+        title: '页面-详情'
       }
     },
     {

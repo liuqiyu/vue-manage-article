@@ -6,14 +6,20 @@ const tagsView = {
   },
   mutations: {
     ADD_VISITED_VIEWS (state, view) {
+      console.log(view)
       if (state.visitedViews.some(v => v.path === view.path)) return
       // 如果是详情附属页面，则不需要新增tag标签
-      if (view.meta && view.meta.noMenu) {
+      if (view.meta) {
         if (
           state.visitedViews.some(
             v => v.meta.activeMenu === view.meta.activeMenu
           )
         ) {
+          state.visitedViews.forEach(v => {
+            if (v.meta.activeMenu === view.meta.activeMenu) {
+              v.path = view.path
+            }
+          })
           return
         }
       }
