@@ -90,18 +90,14 @@ export default {
       this.formItemControl()
     },
     onSubmit () {
-      console.log('submit!')
-      console.log(this.model)
       this.$emit('formSubmit', this.model)
     },
     onReset () {
-      console.log('reset!')
       this.formFields.forEach((item, index) => {
         // 初始化数据
         this.$set(this.model, item.columnName, null)
       })
       this.$emit('formSubmit')
-      console.log(this.model)
     },
     onControl () {
       this.status = !this.status

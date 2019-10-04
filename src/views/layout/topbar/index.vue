@@ -13,12 +13,18 @@
 </template>
 
 <script>
+import { mapGetters } from 'vuex'
 import rightBar from './right-bar'
 
 export default {
   name: 'index',
   components: {
     rightBar
+  },
+  computed: {
+    ...mapGetters([
+      'isCollapse'
+    ])
   }
 }
 </script>

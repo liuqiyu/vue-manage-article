@@ -74,7 +74,6 @@ export default {
   },
   mounted () {
     Object.assign(this.ruleForm, this.dialogData.data)
-    console.log(this.ruleForm)
   },
   methods: {
     confirm () {
@@ -86,7 +85,6 @@ export default {
             type: 'success'
           })
         } else {
-          console.log('error submit!!')
           return false
         }
       })

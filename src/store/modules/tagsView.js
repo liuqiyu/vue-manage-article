@@ -6,15 +6,22 @@ const tagsView = {
   },
   mutations: {
     ADD_VISITED_VIEWS (state, view) {
-      console.log(view)
       if (state.visitedViews.some(v => v.path === view.path)) return
       // 如果是详情附属页面，则不需要新增tag标签
-      if (view.meta && view.meta.notMenu) {
-        if (state.visitedViews.some(v => v.meta.activeMenu === view.meta.activeMenu)) return
+      if (view.meta && view.meta.noMenu) {
+        if (
+          state.visitedViews.some(
+            v => v.meta.activeMenu === view.meta.activeMenu
+          )
+        ) {
+          return
+        }
       }
-      state.visitedViews.push(Object.assign({}, view, {
-        title: view.meta.title || 'no-name'
-      }))
+      state.visitedViews.push(
+        Object.assign({}, view, {
+          title: view.meta.title || 'no-name'
+        })
+      )
     },
     ADD_CACHED_VIEWS (state, view) {
       if (state.cachedViews.includes(view.name)) return
@@ -72,26 +79,17 @@ const tagsView = {
     }
   },
   actions: {
-    addView ({
-      dispatch
-    }, view) {
+    addView ({ dispatch }, view) {
       dispatch('addVisitedViews', view)
       dispatch('addCachedViews', view)
     },
-    addVisitedViews ({
-      commit
-    }, view) {
+    addVisitedViews ({ commit }, view) {
       commit('ADD_VISITED_VIEWS', view)
     },
-    addCachedViews ({
-      commit
-    }, view) {
+    addCachedViews ({ commit }, view) {
       commit('ADD_CACHED_VIEWS', view)
     },
-    delView ({
-      dispatch,
-      state
-    }, view) {
+    delView ({ dispatch, state }, view) {
       return new Promise(resolve => {
         dispatch('delVisitedView', view)
         dispatch('delCachedView', view)
@@ -101,28 +99,19 @@ const tagsView = {
         })
       })
     },
-    delVisitedView ({
-      commit,
-      state
-    }, view) {
+    delVisitedView ({ commit, state }, view) {
       return new Promise(resolve => {
         commit('DEL_VISITED_VIEW', view)
         resolve([...state.visitedViews])
       })
     },
-    delCachedView ({
-      commit,
-      state
-    }, view) {
+    delCachedView ({ commit, state }, view) {
       return new Promise(resolve => {
         commit('DEL_CACHED_VIEW', view)
         resolve([...state.cachedViews])
       })
     },
-    delOthersViews ({
-      dispatch,
-      state
-    }, view) {
+    delOthersViews ({ dispatch, state }, view) {
       return new Promise(resolve => {
         dispatch('delOthersVisitedViews', view)
         dispatch('delOthersCachedViews', view)
@@ -132,28 +121,19 @@ const tagsView = {
         })
       })
     },
-    delOthersVisitedViews ({
-      commit,
-      state
-    }, view) {
+    delOthersVisitedViews ({ commit, state }, view) {
       return new Promise(resolve => {
         commit('DEL_OTHERS_VISITED_VIEWS', view)
         resolve([...state.visitedViews])
       })
     },
-    delOthersCachedViews ({
-      commit,
-      state
-    }, view) {
+    delOthersCachedViews ({ commit, state }, view) {
       return new Promise(resolve => {
         commit('DEL_OTHERS_CACHED_VIEWS', view)
         resolve([...state.cachedViews])
       })
     },
-    delAllViews ({
-      dispatch,
-      state
-    }, view) {
+    delAllViews ({ dispatch, state }, view) {
       return new Promise(resolve => {
         dispatch('delAllVisitedViews', view)
         dispatch('delAllCachedViews', view)
@@ -163,28 +143,20 @@ const tagsView = {
         })
       })
     },
-    delAllVisitedViews ({
-      commit,
-      state
-    }) {
+    delAllVisitedViews ({ commit, state }) {
       return new Promise(resolve => {
         commit('DEL_ALL_VISITED_VIEWS')
         resolve([...state.visitedViews])
       })
     },
-    delAllCachedViews ({
-      commit,
-      state
-    }) {
+    delAllCachedViews ({ commit, state }) {
       return new Promise(resolve => {
         commit('DEL_ALL_CACHED_VIEWS')
         resolve([...state.cachedViews])
       })
     },
 
-    updateVisitedView ({
-      commit
-    }, view) {
+    updateVisitedView ({ commit }, view) {
       commit('UPDATE_VISITED_VIEW', view)
     }
   }

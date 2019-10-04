@@ -99,7 +99,7 @@ export default {
           // 选中后操作
           selectionChange: row => {
             this.multipleSelection = row
-            console.log('选中', this.multipleSelection)
+            // console.log('选中', this.multipleSelection)
             // if (row.length > 0)
           }
         },
@@ -138,7 +138,7 @@ export default {
       this.showDynamicDialog('detailsDialog', '新增', '400px')
     },
     hanleDel () {
-      console.log('删除', this.multipleSelection)
+      // console.log('删除', this.multipleSelection)
     },
     showDynamicDialog (view, title, width = '1200px') {
       this.dialogOption.show = true

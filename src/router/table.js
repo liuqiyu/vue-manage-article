@@ -17,44 +17,41 @@ export default {
       component: () =>
         import(/* webpackChunkName: "table" */ './../views/table/default'),
       meta: {
-        title: '表格弹窗',
-        affix: false
+        title: '表格'
       }
     },
     {
-      path: 'details',
-      name: 'details-table',
+      path: 'page',
+      name: 'page-table',
       component: () =>
-        import(/* webpackChunkName: "table" */ './../views/table/details'),
+        import(/* webpackChunkName: "table" */ './../views/table/page'),
       meta: {
-        activeMenu: '/table/details',
-        title: '表格详情',
-        affix: false
+        activeMenu: '/table/page',
+        noCache: false,
+        title: '页面'
       }
     },
     {
-      path: 'details/add',
-      name: 'details-table-add',
+      path: 'page/add',
+      name: 'page-table-add',
       hidden: true,
       component: () =>
-        import(/* webpackChunkName: "table" */ './../views/table/details/add'),
+        import(/* webpackChunkName: "table" */ './../views/table/page/add'),
       meta: {
-        notMenu: true,
-        activeMenu: '/table/details',
-        title: '详情表格-新增',
-        affix: false
+        noMenu: true,
+        activeMenu: '/table/page',
+        title: '详情表格-新增'
       }
     },
     {
-      path: 'details/details/:id',
-      name: 'details-table-details',
+      path: 'page/details/:id',
+      name: 'page-table-details',
       component: () =>
-        import(/* webpackChunkName: "table" */ './../views/table/details/details'),
+        import(/* webpackChunkName: "table" */ './../views/table/page/details'),
       meta: {
-        notMenu: true,
-        activeMenu: '/table/details',
-        title: '详情表格-详情',
-        affix: false
+        noMenu: true,
+        activeMenu: '/table/page',
+        title: '详情表格-详情'
       }
     },
     {
@@ -63,9 +60,8 @@ export default {
       component: () =>
         import(/* webpackChunkName: "table" */ './../views/table/custom-header'),
       meta: {
-        tag: '/table/custom-header',
-        title: '自定义表头',
-        affix: false
+        activeMenu: '/table/custom-header',
+        title: '自定义表头'
       }
     }
   ]

@@ -5,7 +5,6 @@ const router = {
   },
   mutations: {
     SET_ROUTER (state, routes) {
-      console.log(routes)
       state.routes = routes
     }
   },

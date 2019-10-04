@@ -9,7 +9,7 @@
 
 <script>
 export default {
-  name: 'details-table',
+  name: 'page-table',
   data () {
     return {
       formFields: [
@@ -87,7 +87,7 @@ export default {
           // 选中后操作
           selectionChange: row => {
             this.multipleSelection = row
-            console.log('选中', this.multipleSelection)
+            // console.log('选中', this.multipleSelection)
           }
         },
         columns: [
@@ -145,12 +145,12 @@ export default {
   methods: {
     handleUpdate (row) {
       this.$router.push({
-        path: '/table/details/details/1'
+        path: '/table/page/details/1'
       })
     },
     handleAdd () {
       this.$router.push({
-        path: '/table/details/add'
+        path: '/table/page/add'
       })
     },
     handleDel (row) {

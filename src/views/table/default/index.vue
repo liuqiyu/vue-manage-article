@@ -122,7 +122,7 @@ export default {
           // 选中后操作
           selectionChange: row => {
             this.multipleSelection = row
-            console.log('选中', this.multipleSelection)
+            // console.log('选中', this.multipleSelection)
             // if (row.length > 0)
           }
         },

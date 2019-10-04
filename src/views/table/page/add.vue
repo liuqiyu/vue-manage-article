@@ -47,11 +47,11 @@
 
 <script>
 export default {
-  name: 'details-table-details',
+  name: 'page-table-details',
   data () {
     return {
       options: {
-        back: '/table/details'
+        back: '/table/page'
       },
       status: 'details',
       loading: false,
@@ -104,10 +104,9 @@ export default {
             type: 'success'
           })
           this.$router.push({
-            path: '/table/details/details/1'
+            path: '/table/page/details/1'
           })
         } else {
-          console.log('error submit!!')
           return false
         }
       })

@@ -8,6 +8,5 @@ export const getRoutes = (context, ignore) => {
       }
     }
   })
-  console.log(children)
   return children
 }

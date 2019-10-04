@@ -101,7 +101,6 @@ export default {
       return tags
     },
     addTags () {
-      console.log(this.$route)
       const { name } = this.$route
       if (name) {
         this.$store.dispatch('tagsView/addView', this.$route)

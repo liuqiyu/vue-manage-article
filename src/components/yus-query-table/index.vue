@@ -106,7 +106,6 @@ export default {
         pageSize: this.pageSize
       })
 
-      console.log(this.queryModel)
       // 请求前回调函数
       if (this.tables.options && typeof this.tables.options.beforeHttp === 'function') {
         this.tables.options.beforeHttp()

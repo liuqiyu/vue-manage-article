@@ -162,7 +162,6 @@ export default {
     },
     // 双击行
     rowDblClick (row, column, event) {
-      // console.log(row, column, event)
       if (!this.options.rowDblClick) {
         return
       }
