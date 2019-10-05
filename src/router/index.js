@@ -13,8 +13,8 @@ const routerModule = getRoutes(
   './index.js'
 )
 
+// 菜单排序
 const menuRouters = []
-
 Object.keys(menuSort).forEach(item => {
   routerModule.forEach(v => {
     if (menuSort[item] === v.meta.title) {
