@@ -10,6 +10,8 @@
 
 - [使用文档](https://liuqiyu.github.io/yunotes/vue-admin-pro/)
 
+本项目基于`vue-cli3`脚手架搭建。
+
 ## 项目目录
 
 ## 功能结构
@@ -36,3 +38,5 @@
 ## 部署
 
 部署在 `github pages`
+
+##
