@@ -11,7 +11,7 @@ $top-bg: #173997;
 $menu-bg: #292c31;
 //自定义
 $theme: #4676E5;
-$border-color: #dcdae2;
+$borderColor: #dee8f8; // 边框颜色
 $disable-color: #dddddd;
 
 // base color
@@ -43,6 +43,7 @@ $sideBarWidth: 200px;
 // the :export directive is the magic sauce for webpack
 // https://www.bluematador.com/blog/how-to-share-variables-between-js-and-sass
 :export {
+  borderColor: $borderColor;
   defaultColor: $defaultColor;
   menuText: $menuText;
   menuActiveText: $menuActiveText;

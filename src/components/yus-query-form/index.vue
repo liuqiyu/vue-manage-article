@@ -136,9 +136,10 @@ export default {
 </script>
 
 <style scoped lang="scss">
+@import "~@/style/variable";
 .query-form {
   background: #ffffff;
-  border: 1px solid #dee8f8;
+  border: 1px solid $borderColor;
   padding: 10px 10px 0 10px;
   .query-form-btns {
     margin-left: 5px;

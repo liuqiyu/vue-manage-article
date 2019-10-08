@@ -12,8 +12,9 @@ import YusQueyForm from './yus-query-form'
 import YusTableList from './yus-query-table/yus-table-list'
 import YusDialog from './yus-dialog'
 import YusDetailsPage from './yus-details-page'
+import YusContentItem from './yus-content-item'
 
-const components = [YusQueryTable, YusToolBar, YusQueyForm, YusTableList, YusDialog, YusDetailsPage]
+const components = [YusQueryTable, YusToolBar, YusQueyForm, YusTableList, YusDialog, YusDetailsPage, YusContentItem]
 
 const setPrototype = () => {
   Vue.prototype.$bus = new Vue()

@@ -1,37 +1,18 @@
 <template>
-  <div class="details-page">
+  <div class="yus-content-item">
     <header>
-      <div class="left-bar">
-        <router-link v-if="options && options.back"
-                     tag="span"
-                     class="back iconfont icon-fanhui"
-                     replace
-                     :to="options.back"></router-link>
-        <h3 class="title">
-          {{(options && options.title) || title}}
-        </h3>
-
-        <!-- <div class="tags">
-          <slot name="tag">
-            <el-tag type="success"
-                    effect="dark">已完成</el-tag>
-          </slot>
-        </div> -->
-      </div>
-      <div class="right-bar">
-        <yus-tool-bar :tools="tools"></yus-tool-bar>
-      </div>
+      <h3>{{title || ''}}</h3>
     </header>
-    <div class="content">
+    <section>
       <slot></slot>
-    </div>
+    </section>
   </div>
 </template>
 
 <script>
 
 export default {
-  name: 'yus-details-page',
+  name: 'yus-content-item',
   props: {
     options: {
       type: Object,
@@ -52,7 +33,7 @@ export default {
 
 <style lang="scss" scoped>
 @import "~@/style/variable";
-.details-page {
+.yus-content-item {
   background: #ffffff;
   border: 1px solid $borderColor;
   header {
@@ -81,7 +62,7 @@ export default {
       }
     }
   }
-  .content {
+  section {
     padding: 10px 20px;
   }
 }
