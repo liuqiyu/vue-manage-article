@@ -1,5 +1,5 @@
 <template>
-  <div v-if="!(item.hidden || (item.meta && item.meta.noMenu))"
+  <div v-if="!item.hidden"
        class="menu-item-wrapper">
     <template v-if="hasOneShowingChild(item.children,item) && !onlyOneChild.children && !item.showRoot">
       <app-link v-if="onlyOneChild.meta"
@@ -67,7 +67,7 @@ export default {
   methods: {
     hasOneShowingChild (children = [], parent) {
       const showingChildren = children.filter(item => {
-        if (item.hidden || (item.meta && item.meta.noMenu)) {
+        if (item.hidden) {
           return false
         } else {
           // Temp set(will be used if only has one showing child)
