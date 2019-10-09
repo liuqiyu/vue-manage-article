@@ -9,26 +9,23 @@ export default {
     title: '错误页面'
   },
   component: Layout,
-  children: [
-    {
-      path: '404',
-      name: 'error-404',
-      component: () =>
+  children: [{
+    path: '404',
+    name: 'error-404',
+    component: () =>
         import(/* webpackChunkName: "errorPage" */ '@/views/error/404'),
-      meta: {
-        activeMenu: '/error',
-        title: '404'
-      }
-    },
-    {
-      path: '401',
-      name: 'error-401',
-      component: () =>
-        import(/* webpackChunkName: "errorPage" */ '@/views/error/401'),
-      meta: {
-        activeMenu: '/error',
-        title: '401'
-      }
+    meta: {
+      title: '404'
     }
+  },
+  {
+    path: '401',
+    name: 'error-401',
+    component: () =>
+        import(/* webpackChunkName: "errorPage" */ '@/views/error/401'),
+    meta: {
+      title: '401'
+    }
+  }
   ]
 }

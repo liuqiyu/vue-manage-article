@@ -57,7 +57,6 @@ export default {
     component: () =>
         import(/* webpackChunkName: "table" */ './../views/table/custom-header'),
     meta: {
-      activeMenu: '/table/custom-header',
       title: '自定义表头'
     }
   }

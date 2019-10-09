@@ -2,7 +2,6 @@ import Layout from './../views/layout'
 
 export default {
   path: '/echarts',
-  name: 'echarts',
   component: Layout,
   showRoot: false, // will show root menu
   meta: {
@@ -11,11 +10,10 @@ export default {
   },
   children: [{
     path: 'index',
-    name: '/echarts/index',
+    name: 'echarts',
     component: () =>
       import(/* webpackChunkName: "echarts" */ './../views/echarts/index'),
     meta: {
-      activeMenu: '/echarts/index',
       title: '图表'
     }
   }]
