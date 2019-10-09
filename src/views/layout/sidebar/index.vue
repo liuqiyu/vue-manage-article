@@ -8,7 +8,7 @@
                :background-color="variables.menuBg"
                :text-color="variables.menuText"
                :unique-opened="true"
-               :active-text-color="variables.menuActiveText"
+               active-text-color="red"
                :collapse-transition="false"
                mode="vertical">
         <sidebar-item v-for="route in menuRoutes"

@@ -1,6 +1,7 @@
 <template>
   <div class="right-bar">
     <div class="tools">
+      <yus-theme-picker></yus-theme-picker>
       <span class="iconfont icon-quanping"
             @click="screenfull"></span>
     </div>
@@ -92,7 +93,10 @@ export default {
   height: 100%;
   .tools {
     margin-right: 10px;
-    span {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    > * {
       font-size: 22px;
       margin-right: 12px;
       color: #f1f1f1;

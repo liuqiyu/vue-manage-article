@@ -4,6 +4,7 @@ import router from './modules/router'
 import tagsView from './modules/tagsView'
 import user from './modules/user'
 import roles from './modules/roles'
+import settings from './modules/settings'
 
 Vue.use(Vuex)
 
@@ -12,7 +13,8 @@ export default new Vuex.Store({
     router,
     tagsView,
     user,
-    roles
+    roles,
+    settings
   },
   state: {
     isCollapse: false
