@@ -6,8 +6,6 @@
                 :to="resolvePath(onlyOneChild.path)">
         <el-menu-item :index="resolvePath(onlyOneChild.path)"
                       :class="{'submenu-title-noDropdown':!isNest}">
-          <!-- <item :icon="onlyOneChild.meta.icon||(item.meta&&item.meta.icon)"
-                :title="onlyOneChild.meta.title" /> -->
           <i class="icon iconfont"
              :class="onlyOneChild.meta.icon||(item.meta&&item.meta.icon)"></i>
           <span slot="title">{{onlyOneChild.meta.title}}</span>
@@ -20,9 +18,6 @@
                 :index="resolvePath(item.path)"
                 popper-append-to-body>
       <template slot="title">
-        <!-- <item v-if="item.meta"
-              :icon="item.meta && item.meta.icon"
-              :title="item.meta.title" /> -->
         <i class="icon iconfont"
            :class="item.meta && item.meta.icon"></i>
         <span slot="title">{{item.meta.title}}</span>
@@ -46,7 +41,6 @@ export default {
   name: 'SidebarItem',
   components: { AppLink },
   props: {
-    // route object
     item: {
       type: Object,
       required: true

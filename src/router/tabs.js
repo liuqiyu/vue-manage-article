@@ -5,7 +5,6 @@ export default {
   component: Layout,
   showRoot: false, // will show root menu
   meta: {
-    icon: 'icon-tabs',
     title: 'Tabs'
   },
   children: [{
@@ -14,7 +13,7 @@ export default {
     component: () =>
       import(/* webpackChunkName: "tabs" */ './../views/tabs/index'),
     meta: {
-      activeMenu: '/echarts/index',
+      icon: 'icon-tabs',
       title: 'Tabs'
     }
   }]

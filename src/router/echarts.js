@@ -5,7 +5,6 @@ export default {
   component: Layout,
   showRoot: false, // will show root menu
   meta: {
-    icon: 'icon-ditumap29',
     title: '图表'
   },
   children: [{
@@ -14,6 +13,7 @@ export default {
     component: () =>
       import(/* webpackChunkName: "echarts" */ './../views/echarts/index'),
     meta: {
+      icon: 'icon-ditumap29',
       title: '图表'
     }
   }]
