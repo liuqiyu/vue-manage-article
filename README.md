@@ -53,9 +53,22 @@ npm run dev
 
 ## 部署
 
-部署在 `github pages`
+### 部署在 `github pages`
 
-`bash deploy`
+运行 `bash deploy` 则主动打包部署到 `github pages` 中。
+
+### 服务器
+
+```bash
+# build for production environment
+npm run build
+
+# build for dev environment
+npm run build:dev
+
+# build for sit environment
+npm run build:sit
+```
 
 ## changelog
 
@@ -71,6 +84,6 @@ Modern browsers and Internet Explorer 10+.
 
 ## License
 
-[MIT](https://github.com/PanJiaChen/vue-element-admin/blob/master/LICENSE)
+[MIT](https://github.com/liuqiyu/vue-admin-pro/blob/master/LICENSE)
 
-Copyright (c) 2017-present PanJiaChen
+Copyright (c) 2019-present Kaway
