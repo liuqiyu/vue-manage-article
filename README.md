@@ -53,11 +53,11 @@ npm run dev
 
 ## 部署
 
-### 部署在 `github pages`
+#### 部署在 `github pages`
 
 运行 `bash deploy` 则主动打包部署到 `github pages` 中。
 
-### 服务器
+#### 服务器
 
 ```bash
 # build for production environment
