@@ -15,6 +15,7 @@ export default {
     component: () =>
         import(/* webpackChunkName: "table" */ './../views/table/default'),
     meta: {
+      noCache: true,
       title: '表格'
     }
   },
@@ -25,7 +26,7 @@ export default {
         import(/* webpackChunkName: "table" */ './../views/table/page'),
     meta: {
       activeMenu: '/table/page',
-      noCache: false,
+      noCache: true,
       title: '页面'
     }
   },
@@ -57,6 +58,7 @@ export default {
     component: () =>
         import(/* webpackChunkName: "table" */ './../views/table/custom-header'),
     meta: {
+      noCache: true,
       title: '自定义表头'
     }
   }

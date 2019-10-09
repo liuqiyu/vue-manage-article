@@ -23,7 +23,7 @@
                       :tableData="tableData"
                       @sort-change="sortChange"></yus-table-list>
       <el-pagination class="yus-pagination"
-                     ref="vPagination"
+                     ref="yusPagination"
                      background
                      @size-change="handleSizeChange"
                      @current-change="handleCurrentChange"
