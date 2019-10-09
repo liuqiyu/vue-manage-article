@@ -1,6 +1,6 @@
 <template>
   <div>
-    图表
+    <yus-button type="primary">按钮</yus-button>
   </div>
 </template>
 
