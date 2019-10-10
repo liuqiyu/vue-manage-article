@@ -12,11 +12,18 @@ import YusQueyForm from './yus-query-form'
 import YusTableList from './yus-query-table/yus-table-list'
 import YusDialog from './yus-dialog'
 import YusDetailsPage from './yus-details-page'
-import YusContentItem from './yus-content-item'
+import YusContentPage from './yus-content-page'
+import YusContentRow from './yus-content-row'
+import YusContentCell from './yus-content-cell'
+import YusActionBar from './yus-action-bar'
 import YusThemePicker from './yus-theme-picker'
 import YusButton from './yus-button'
 
-const components = [YusQueryTable, YusToolBar, YusQueyForm, YusTableList, YusDialog, YusDetailsPage, YusContentItem, YusThemePicker, YusButton]
+const components = [YusQueryTable, YusToolBar, YusQueyForm,
+  YusTableList, YusDialog, YusDetailsPage,
+  YusContentPage, YusContentRow, YusContentCell,
+  YusActionBar, YusThemePicker, YusButton
+]
 
 const setPrototype = () => {
   Vue.prototype.$bus = new Vue()

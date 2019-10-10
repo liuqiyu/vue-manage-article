@@ -72,7 +72,11 @@ export default {
   },
   methods: {
     isActive (route) {
-      return route.path === this.$route.path || route.path === this.$route.meta.activeMenu || route.meta.activeMenu === this.$route.meta.activeMenu
+      // tag 选中的条件
+      // 等于当前路由地址 或者
+      // 等于当前路由 meta.activeMenu 或者
+      // 在router.meta 和 route.meta.activeMenu 都存在的情况下，等于当前路由的 meta.activeMenu
+      return route.path === this.$route.path || route.path === this.$route.meta.activeMenu || ((route.meta && route.meta.activeMenu) && (route.meta.activeMenu === this.$route.meta.activeMenu))
     },
     initTags () {
       const affixTags = this.filterAffixTags(this.routes)
@@ -229,6 +233,9 @@ export default {
         position: relative;
         margin-right: 2px;
       }
+    }
+    &:last-of-type {
+      margin-right: 15px;
     }
   }
   .contextmenu {

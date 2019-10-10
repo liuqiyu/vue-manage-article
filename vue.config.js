@@ -15,24 +15,24 @@ module.exports = {
   outputDir: 'dist',
   // assetsDir: 'static',
   devServer: {
-    port,
-    open: true,
+    port, // 代理端口
+    open: true, // 是否自动打开浏览器
+    // 让浏览器 overlay 同时显示警告和错误
     overlay: {
       warnings: false,
       errors: true
+    },
+    proxy: {
+      '/api': {
+        target: 'http://localhost:5858', // 目标代理接口地址
+        secure: false,
+        changeOrigin: true, // 开启代理，在本地创建一个虚拟服务端
+        // ws: true, // 是否启用websockets
+        pathRewrite: {
+          '^/api': '/'
+        }
+      }
     }
-    // proxy: {
-    //   // change xxx-api/login => mock/login
-    //   // detail: https://cli.vuejs.org/config/#devserver-proxy
-    //   [process.env.VUE_APP_BASE_API]: {
-    //     target: `http://127.0.0.1:${port}/mock`,
-    //     changeOrigin: true,
-    //     pathRewrite: {
-    //       ['^' + process.env.VUE_APP_BASE_API]: ''
-    //     }
-    //   }
-    // },
-    // after: require('./mock/mock-server.js')
   },
   configureWebpack: {
     // provide the app's title in webpack's name field, so that

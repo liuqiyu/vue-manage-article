@@ -84,15 +84,12 @@ export default {
       flex-direction: column;
       overflow: hidden;
       .yus-content {
+        position: relative;
         flex: 1;
         height: 100%;
         overflow-y: auto;
         background: #f1f5fa;
         height: 100%;
-        > * {
-          padding: 12px 12px 2px 12px;
-          height: 100%;
-        }
       }
     }
   }

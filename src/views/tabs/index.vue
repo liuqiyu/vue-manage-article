@@ -1,20 +1,98 @@
 <template>
-  <div class="content-container">
-    <yus-content-item>
-      <el-tabs type="border-card"
-               v-model="activeName">
-        <el-tab-pane v-for="(item, index) in TabList"
-                     :label="item.label"
-                     :name="item.name"
-                     :key="index">
-          <keep-alive>
-            <component v-if="item.name === activeName"
-                       :is="activeName"></component>
-          </keep-alive>
-        </el-tab-pane>
-      </el-tabs>
-    </yus-content-item>
-  </div>
+  <yus-content-page>
+    <yus-content-row>
+      <yus-content-cell :title="'使用Keep-alive实现缓存'">
+        <el-tabs type="border-card"
+                 v-model="activeName">
+          <el-tab-pane v-for="(item, index) in TabList"
+                       :label="item.label"
+                       :name="item.name"
+                       :key="index">
+            <keep-alive>
+              <component v-if="item.name === activeName"
+                         :is="activeName"></component>
+            </keep-alive>
+          </el-tab-pane>
+        </el-tabs>
+      </yus-content-cell>
+      <yus-content-cell :title="'其他'">
+        <el-tabs type="border-card"
+                 v-model="activeName">
+          <el-tab-pane v-for="(item, index) in TabList"
+                       :label="item.label"
+                       :name="item.name"
+                       :key="index">
+            <keep-alive>
+              <component v-if="item.name === activeName"
+                         :is="activeName"></component>
+            </keep-alive>
+          </el-tab-pane>
+        </el-tabs>
+      </yus-content-cell>
+    </yus-content-row>
+    <yus-content-row>
+      <yus-content-cell :title="'使用Keep-alive实现缓存'">
+        <el-tabs type="border-card"
+                 v-model="activeName">
+          <el-tab-pane v-for="(item, index) in TabList"
+                       :label="item.label"
+                       :name="item.name"
+                       :key="index">
+            <keep-alive>
+              <component v-if="item.name === activeName"
+                         :is="activeName"></component>
+            </keep-alive>
+          </el-tab-pane>
+        </el-tabs>
+      </yus-content-cell>
+      <yus-content-cell :title="'其他'">
+        <el-tabs type="border-card"
+                 v-model="activeName">
+          <el-tab-pane v-for="(item, index) in TabList"
+                       :label="item.label"
+                       :name="item.name"
+                       :key="index">
+            <keep-alive>
+              <component v-if="item.name === activeName"
+                         :is="activeName"></component>
+            </keep-alive>
+          </el-tab-pane>
+        </el-tabs>
+      </yus-content-cell>
+    </yus-content-row>
+    <yus-content-row>
+      <yus-content-cell :title="'使用Keep-alive实现缓存'">
+        <el-tabs type="border-card"
+                 v-model="activeName">
+          <el-tab-pane v-for="(item, index) in TabList"
+                       :label="item.label"
+                       :name="item.name"
+                       :key="index">
+            <keep-alive>
+              <component v-if="item.name === activeName"
+                         :is="activeName"></component>
+            </keep-alive>
+          </el-tab-pane>
+        </el-tabs>
+      </yus-content-cell>
+      <yus-content-cell :title="'其他'">
+        <el-tabs type="border-card"
+                 v-model="activeName">
+          <el-tab-pane v-for="(item, index) in TabList"
+                       :label="item.label"
+                       :name="item.name"
+                       :key="index">
+            <keep-alive>
+              <component v-if="item.name === activeName"
+                         :is="activeName"></component>
+            </keep-alive>
+          </el-tab-pane>
+        </el-tabs>
+      </yus-content-cell>
+    </yus-content-row>
+    <yus-action-bar :tools="tools"></yus-action-bar>
+  </yus-content-page>
+
 </template>
 
 <script>
@@ -40,7 +118,29 @@ export default {
           name: 'bj'
         }
       ],
-      activeName: 'sz'
+      activeName: 'sz',
+      tools: [
+        {
+          label: '刷新',
+          icon: 'iconfont icon-shuaxin1',
+          func: () => this.$refs.queryTable.loadTable()
+        },
+        {
+          label: '新增',
+          auth: 'addTable',
+          icon: 'iconfont icon-xinzeng',
+          func: () => this.handleAdd()
+        },
+        {
+          label: '删除',
+          auth: 'deleteTable',
+          icon: 'iconfont icon-shanchu',
+          disabled: () => {
+
+          },
+          func: () => this.handleDel()
+        }
+      ]
     }
   },
   watch: {
@@ -57,7 +157,4 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.content-page-white {
-  background: #fff;
-}
 </style>
