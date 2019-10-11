@@ -4,26 +4,26 @@
       <yus-content-cell :title="'使用Keep-alive实现缓存'">
         <el-form ref="form"
                  class="yus-table-form"
+                 :label-position="labelPosition"
                  :model="form"
-                 label-width="80px">
+                 :rules="rules"
+                 label-width="100px">
           <el-row>
             <el-col :span="12">
-              <el-form-item label="活动名称">
+              <el-form-item label="活动名称"
+                            prop="name">
                 <el-input v-model="form.name"></el-input>
               </el-form-item>
             </el-col>
             <el-col :span="12">
-              <el-form-item label="活动名称">
+              <el-form-item label="活动名称"
+                            prop="name">
                 <el-input v-model="form.name"></el-input>
               </el-form-item>
             </el-col>
             <el-col :span="12">
-              <el-form-item label="活动名称">
-                <el-input v-model="form.name"></el-input>
-              </el-form-item>
-            </el-col>
-            <el-col :span="12">
-              <el-form-item label="活动名称">
+              <el-form-item label="活动名称"
+                            prop="name">
                 <el-input v-model="form.name"></el-input>
               </el-form-item>
             </el-col>
@@ -40,6 +40,7 @@ export default {
   name: 'form',
   data () {
     return {
+      labelPosition: 'right',
       tools: [
         {
           label: '返回列表'
@@ -54,12 +55,30 @@ export default {
         type: [],
         resource: '',
         desc: ''
+      },
+      rules: {
+        name: [
+          { required: true, message: '请填写活动形式', trigger: 'blur' }
+        ]
       }
     }
   },
   methods: {
     onSubmit () {
       console.log('submit!')
+    },
+    submitForm () {
+      this.$refs['form'].validate((valid) => {
+        if (valid) {
+          alert('submit!')
+        } else {
+          console.log('error submit!!')
+          return false
+        }
+      })
+    },
+    resetForm () {
+      this.$refs['form'].resetFields()
     }
   }
 }
