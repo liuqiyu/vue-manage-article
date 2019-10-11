@@ -1,5 +1,5 @@
 <template>
-  <yus-content-page style="height: 100%">
+  <div class="content-container">
     <yus-query-table ref="queryTable"
                      :form-fields="formFields"
                      :tools="tools"
@@ -10,17 +10,15 @@
                 :view.sync="dialogOption.view"
                 :visible.sync="dialogOption.show">
       <component :is="dialogOption.view"
-                 :style="{height: dialogHeight}"
                  :dialog-data="dialogData"
                  @close="closeDynamicDialog">
       </component>
     </yus-dialog>
-  </yus-content-page>
+  </div>
 </template>
 
 <script>
 import detailsDialog from './details-dialog'
-import tableDialog from './table-dialog'
 export default {
   name: 'default-table',
   data () {
@@ -111,12 +109,6 @@ export default {
             return !this.multipleSelection.length > 0
           },
           func: () => this.handleDel()
-        },
-        {
-          label: '弹出表格',
-          auth: 'deleteTable',
-          icon: 'iconfont icon-biaoge',
-          func: () => this.handleTable()
         }
       ],
       tables: {
@@ -181,26 +173,22 @@ export default {
           ]
         }
       },
-      multipleSelection: [],
-      dialogHeight: 'auto'
+      multipleSelection: []
     }
   },
   mounted () {
   },
   components: {
-    detailsDialog,
-    tableDialog
+    detailsDialog
   },
   methods: {
     handleUpdate (row) {
-      this.dialogHeight = 'auto'
       this.$set(this.dialogData, 'type', 'details')
       this.$set(this.dialogData, 'label', '编辑')
       this.$set(this.dialogData, 'data', row)
       this.showDynamicDialog('detailsDialog', '详情', '400px')
     },
     handleAdd () {
-      this.dialogHeight = 'auto'
       this.$set(this.dialogData, 'type', 'add')
       this.$set(this.dialogData, 'label', '新增')
       this.$set(this.dialogData, 'data', {})
@@ -217,10 +205,6 @@ export default {
           type: 'success'
         })
       })
-    },
-    handleTable () {
-      this.dialogHeight = '60vh'
-      this.showDynamicDialog('tableDialog', '弹出表格', '1400px')
     },
     showDynamicDialog (view, title, width = '1200px') {
       this.dialogOption.show = true
