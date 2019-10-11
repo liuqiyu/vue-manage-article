@@ -1,0 +1,51 @@
+.yus-admin {
+  .yus-table-form {
+    position: relative;
+
+    &:before {
+      position: absolute;
+      top: 0;
+      left: 0;
+      content: '';
+      height: 1px;
+      width: 100%;
+      background: #E1E7F3;
+    }
+
+    &:after {
+      position: absolute;
+      top: 0;
+      left: 0;
+      content: '';
+      height: 100%;
+      width: 1px;
+      background: #E1E7F3;
+    }
+
+    .el-form-item {
+      height: 46px;
+      margin-bottom: 0;
+      border-bottom: 1px solid #E1E7F3;
+      border-right: 1px solid #E1E7F3;
+      display: flex;
+      align-items: center;
+
+      .el-form-item__label {
+        flex: none;
+        display: flex;
+        width: 120px !important;
+        border-right: 1px solid #E1E7F3;
+        height: 100%;
+        align-items: center;
+      }
+
+      .el-form-item__content {
+        flex: 1;
+        height: 100%;
+        margin-left: 0;
+        display: flex;
+        align-items: center;
+      }
+    }
+  }
+}

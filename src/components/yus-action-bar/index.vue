@@ -1,5 +1,5 @@
 <template>
-  <div class="yus-action-bar fixed"
+  <div class="yus-action-bar"
        ref="yusActionBar">
     <yus-tool-bar v-if="tools.length > 0"
                   :tools="tools">
@@ -18,10 +18,13 @@ export default {
     }
   },
   mounted () {
-    this.$refs.yusActionBar.style.width = this.$refs.yusActionBar.clientWidth + 'px'
-    this.$refs.yusActionBar.style.position = 'fixed'
-    this.$refs.yusActionBar.style.right = 0
-    this.$refs.yusActionBar.style.bottom = 0
+    // this.$nextTick(() => {
+    //   console.log(document.querySelector('.yus-content').clientWidth)
+    //   this.$refs.yusActionBar.style.width = document.querySelector('.yus-content').clientWidth + 'px'
+    //   // this.$refs.yusActionBar.style.position = 'fixed'
+    //   this.$refs.yusActionBar.style.left = 0
+    //   this.$refs.yusActionBar.style.bottom = 0
+    // })
   }
 }
 </script>
@@ -29,8 +32,12 @@ export default {
 <style lang="scss" scoped>
 @import "~@/style/variable";
 .yus-action-bar {
+  text-align: center;
+  /deep/.tool-list {
+    text-align: center;
+  }
   &.fixed {
-    // position: absolute;
+    position: absolute;
     z-index: 11;
     background: #ffffff;
     box-shadow: 0 0 8px 0 #cadaf5;
