@@ -1,10 +1,10 @@
 <template>
-  <div class="content-container">
+  <yus-content-page style="height: 100%">
     <yus-query-table ref="queryTable"
                      :form-fields="formFields"
                      :tools="tools"
                      :tables="tables"></yus-query-table>
-  </div>
+  </yus-content-page>
 </template>
 
 <script>

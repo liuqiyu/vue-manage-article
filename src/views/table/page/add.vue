@@ -1,48 +1,47 @@
 <template>
-  <div v-loading="loading">
-    <yus-details-page :options="options"
-                      :tools="tools">
-      <el-form :model="ruleForm"
-               :rules="rules"
-               ref="ruleForm"
-               label-width="60px"
-               class="demo-ruleForm">
-        <el-row :gutter="20">
-          <el-col :span="12">
-            <el-form-item label="姓名"
-                          prop="name">
-              <el-input v-model="ruleForm.name"></el-input>
-            </el-form-item>
-          </el-col>
-          <el-col :span="12">
-            <el-form-item label="昵称"
-                          prop="nickname">
-              <el-input v-model="ruleForm.nickname"></el-input>
-            </el-form-item>
-          </el-col>
-          <el-col :span="12">
-            <el-form-item label="年龄"
-                          prop="age">
-              <el-input v-model="ruleForm.age"></el-input>
-            </el-form-item>
-          </el-col>
-          <el-col :span="12">
+  <yus-details-page v-loading="loading"
+                    :options="options"
+                    :tools="tools">
+    <el-form :model="ruleForm"
+             :rules="rules"
+             ref="ruleForm"
+             label-width="60px"
+             class="demo-ruleForm">
+      <el-row :gutter="20">
+        <el-col :span="12">
+          <el-form-item label="姓名"
+                        prop="name">
+            <el-input v-model="ruleForm.name"></el-input>
+          </el-form-item>
+        </el-col>
+        <el-col :span="12">
+          <el-form-item label="昵称"
+                        prop="nickname">
+            <el-input v-model="ruleForm.nickname"></el-input>
+          </el-form-item>
+        </el-col>
+        <el-col :span="12">
+          <el-form-item label="年龄"
+                        prop="age">
+            <el-input v-model="ruleForm.age"></el-input>
+          </el-form-item>
+        </el-col>
+        <el-col :span="12">
 
-            <el-form-item label="性别"
-                          prop="gender">
-              <el-input v-model="ruleForm.gender"></el-input>
-            </el-form-item>
-          </el-col>
-          <el-col :span="12">
-            <el-form-item label="地址"
-                          prop="address">
-              <el-input v-model="ruleForm.address"></el-input>
-            </el-form-item>
-          </el-col>
-        </el-row>
-      </el-form>
-    </yus-details-page>
-  </div>
+          <el-form-item label="性别"
+                        prop="gender">
+            <el-input v-model="ruleForm.gender"></el-input>
+          </el-form-item>
+        </el-col>
+        <el-col :span="12">
+          <el-form-item label="地址"
+                        prop="address">
+            <el-input v-model="ruleForm.address"></el-input>
+          </el-form-item>
+        </el-col>
+      </el-row>
+    </el-form>
+  </yus-details-page>
 </template>
 
 <script>

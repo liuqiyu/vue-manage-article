@@ -55,6 +55,7 @@ export default {
 .details-page {
   background: #ffffff;
   border: 1px solid $borderColor;
+  padding: 12px 12px 2px 12px;
   header {
     padding: 0 20px;
     height: 50px;
