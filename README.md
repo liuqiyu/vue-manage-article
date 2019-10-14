@@ -12,6 +12,8 @@
 
 本项目基于`vue-cli3`脚手架搭建。
 
+  <img width="100%" src="./images/layout.png">
+
 ## 项目目录
 
 ## 功能结构
