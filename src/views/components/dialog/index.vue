@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <yus-content-page>
     <el-card class="box-card">
       <div slot="header"
            class="clearfix">
@@ -26,7 +26,7 @@
                  @close="closeDynamicDialog">
       </component>
     </yus-dialog>
-  </div>
+  </yus-content-page>
 </template>
 
 <script>

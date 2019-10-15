@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <yus-content-page style="height: 100%">
     <el-card class="box-card">
       <div slot="header"
            class="clearfix">
@@ -14,7 +14,7 @@
                 show-icon>
       </el-alert>
     </el-card>
-  </div>
+  </yus-content-page>
 </template>
 
 <script>

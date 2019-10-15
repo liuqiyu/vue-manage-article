@@ -1,5 +1,5 @@
 <template>
-  <div class="content-container">
+  <yus-content-page style="height: 100%">
     <yus-query-table ref="queryTable"
                      :form-fields="formFields"
                      :tools="tools"
@@ -15,7 +15,7 @@
                  @close="closeDynamicDialog">
       </component>
     </yus-dialog>
-  </div>
+  </yus-content-page>
 </template>
 
 <script>
