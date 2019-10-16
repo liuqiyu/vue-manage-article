@@ -1,5 +1,6 @@
 <template>
   <div class="yus-action-bar"
+       :class="'is-' + type"
        ref="yusActionBar">
     <yus-tool-bar v-if="tools.length > 0"
                   :tools="tools">
@@ -15,16 +16,11 @@ export default {
     tools: {
       type: Array,
       default: () => []
+    },
+    type: {
+      type: String,
+      default: () => 'default'
     }
-  },
-  mounted () {
-    // this.$nextTick(() => {
-    //   console.log(document.querySelector('.yus-content').clientWidth)
-    //   this.$refs.yusActionBar.style.width = document.querySelector('.yus-content').clientWidth + 'px'
-    //   // this.$refs.yusActionBar.style.position = 'fixed'
-    //   this.$refs.yusActionBar.style.left = 0
-    //   this.$refs.yusActionBar.style.bottom = 0
-    // })
   }
 }
 </script>
@@ -36,8 +32,13 @@ export default {
   /deep/.tool-list {
     text-align: center;
   }
-  &.fixed {
+  &.is-default {
+    padding-bottom: 100px;
+  }
+  &.is-fixed {
     position: absolute;
+    bottom: 0;
+    right: 0;
     z-index: 11;
     background: #ffffff;
     box-shadow: 0 0 8px 0 #cadaf5;

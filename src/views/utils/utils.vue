@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <yus-content-page>
     <el-card class="box-card">
       <div slot="header"
            class="clearfix">
@@ -24,7 +24,7 @@
         <span>{{0 | lookup('/getGender')}} 、 异步失败</span>
       </div>
     </el-card>
-  </div>
+  </yus-content-page>
 </template>
 
 <script>

@@ -1,5 +1,65 @@
 <template>
-  <yus-content-page :tools="tools">
+  <yus-content-page :action="action">
+    <yus-content-row>
+      <yus-content-cell :title="'使用Keep-alive实现缓存'">
+        <el-tabs type="border-card"
+                 v-model="activeName">
+          <el-tab-pane v-for="(item, index) in TabList"
+                       :label="item.label"
+                       :name="item.name"
+                       :key="index">
+            <keep-alive>
+              <component v-if="item.name === activeName"
+                         :is="activeName"></component>
+            </keep-alive>
+          </el-tab-pane>
+        </el-tabs>
+      </yus-content-cell>
+      <yus-content-cell :title="'其他'">
+        <el-tabs type="border-card"
+                 v-model="activeName">
+          <el-tab-pane v-for="(item, index) in TabList"
+                       :label="item.label"
+                       :name="item.name"
+                       :key="index">
+            <keep-alive>
+              <component v-if="item.name === activeName"
+                         :is="activeName"></component>
+            </keep-alive>
+          </el-tab-pane>
+        </el-tabs>
+      </yus-content-cell>
+    </yus-content-row>
+    <yus-content-row>
+      <yus-content-cell :title="'使用Keep-alive实现缓存'">
+        <el-tabs type="border-card"
+                 v-model="activeName">
+          <el-tab-pane v-for="(item, index) in TabList"
+                       :label="item.label"
+                       :name="item.name"
+                       :key="index">
+            <keep-alive>
+              <component v-if="item.name === activeName"
+                         :is="activeName"></component>
+            </keep-alive>
+          </el-tab-pane>
+        </el-tabs>
+      </yus-content-cell>
+      <yus-content-cell :title="'其他'">
+        <el-tabs type="border-card"
+                 v-model="activeName">
+          <el-tab-pane v-for="(item, index) in TabList"
+                       :label="item.label"
+                       :name="item.name"
+                       :key="index">
+            <keep-alive>
+              <component v-if="item.name === activeName"
+                         :is="activeName"></component>
+            </keep-alive>
+          </el-tab-pane>
+        </el-tabs>
+      </yus-content-cell>
+    </yus-content-row>
     <yus-content-row>
       <yus-content-cell :title="'使用Keep-alive实现缓存'">
         <el-tabs type="border-card"
@@ -57,11 +117,13 @@ export default {
         }
       ],
       activeName: 'sz',
-      tools: [
-        {
-          label: '返回列表'
-        }
-      ]
+      action: {
+        tools: [
+          {
+            label: '返回列表'
+          }
+        ]
+      }
     }
   },
   watch: {

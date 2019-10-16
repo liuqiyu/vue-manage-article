@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <yus-content-page>
     <yus-details-page>
       <el-tree :data="data"
                :props="defaultProps"
@@ -7,7 +7,7 @@
                @check-change="handleCheckChange"
                @node-click="handleNodeClick"></el-tree>
     </yus-details-page>
-  </div>
+  </yus-content-page>
 </template>
 
 <script>
