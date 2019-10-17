@@ -1,8 +1,8 @@
 <template>
-  <div>
+  <yus-content-page>
     <yus-button type="primary">按钮</yus-button>
     <child @hook:mounted="childMounted"></child>
-  </div>
+  </yus-content-page>
 </template>
 
 <script>

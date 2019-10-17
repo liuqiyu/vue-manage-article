@@ -118,6 +118,7 @@ export default {
       ],
       activeName: 'sz',
       action: {
+        type: 'fixed',
         tools: [
           {
             label: '返回列表'
