@@ -2,8 +2,8 @@
   <div class="yus-action-bar"
        :class="'is-' + type"
        ref="yusActionBar">
-    <yus-tool-bar v-if="tools.length > 0"
-                  :tools="tools">
+    <yus-tool-bar v-if="action.length > 0"
+                  :tools="action">
     </yus-tool-bar>
   </div>
 </template>
@@ -13,13 +13,21 @@
 export default {
   name: 'yus-action-bar',
   props: {
-    tools: {
+    action: {
       type: Array,
       default: () => []
     },
     type: {
       type: String,
       default: () => 'default'
+    }
+  },
+  mounted () {
+    console.log(this.$el)
+    if (this.type === 'fixed') {
+      const $yusContent = document.querySelector('.yus-main')
+      document.querySelector('.yus-content').style.paddingBottom = '54px'
+      $yusContent.appendChild(this.$el)
     }
   }
 }

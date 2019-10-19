@@ -1,5 +1,5 @@
 <template>
-  <yus-content-page :tools="tools">
+  <yus-content-page>
     <yus-content-row>
       <yus-content-cell :title="'使用Keep-alive实现缓存'">
         <el-form ref="form"
@@ -31,17 +31,18 @@
         </el-form>
       </yus-content-cell>
     </yus-content-row>
+    <yus-action-bar :action="action"></yus-action-bar>
   </yus-content-page>
 </template>
 
 <script>
 
 export default {
-  name: 'form',
+  name: 'asp-form',
   data () {
     return {
       labelPosition: 'right',
-      tools: [
+      action: [
         {
           label: '返回列表'
         }
