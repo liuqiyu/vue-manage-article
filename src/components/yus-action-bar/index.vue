@@ -9,7 +9,7 @@
 </template>
 
 <script>
-
+import { mapGetters } from 'vuex'
 export default {
   name: 'yus-action-bar',
   props: {
@@ -22,23 +22,34 @@ export default {
       default: () => 'default'
     }
   },
+  computed: {
+    ...mapGetters([
+      'isCollapse'
+    ])
+  },
+  // watch: {
+  //   isCollapse (val) {
+  //     this.resizeAction()
+  //   }
+  // },
   mounted () {
     this.$bus.$on('GLOBAL_RESIZE', this.initAction)
     this.initAction()
     this.resizeAction()
   },
   destroyed () {
-    this.$bus.$off('GLOBAL_RESIZE', this.initAction)
+    this.$bus.$off('GLOBAL_RESIZE', this.resizeAction)
   },
   methods: {
-    initAction () {
+    resizeAction () {
       if (this.type === 'fixed') {
         const $yusMain = document.querySelector('.yus-main')
         document.querySelector('.yus-content').style.paddingBottom = '54px'
+        console.log($yusMain.clientWidth)
         this.$el.style.width = $yusMain.clientWidth + 'px' // 设置action-bar宽度
       }
     },
-    resizeAction () {
+    initAction () {
       if (this.type === 'fixed') {
         const $yusMain = document.querySelector('.yus-main')
         $yusMain.appendChild(this.$el)
