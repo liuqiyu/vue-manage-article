@@ -23,11 +23,26 @@ export default {
     }
   },
   mounted () {
-    console.log(this.$el)
-    if (this.type === 'fixed') {
-      const $yusContent = document.querySelector('.yus-main')
-      document.querySelector('.yus-content').style.paddingBottom = '54px'
-      $yusContent.appendChild(this.$el)
+    this.$bus.$on('GLOBAL_RESIZE', this.initAction)
+    this.initAction()
+    this.resizeAction()
+  },
+  destroyed () {
+    this.$bus.$off('GLOBAL_RESIZE', this.initAction)
+  },
+  methods: {
+    initAction () {
+      if (this.type === 'fixed') {
+        const $yusMain = document.querySelector('.yus-main')
+        document.querySelector('.yus-content').style.paddingBottom = '54px'
+        this.$el.style.width = $yusMain.clientWidth + 'px' // 设置action-bar宽度
+      }
+    },
+    resizeAction () {
+      if (this.type === 'fixed') {
+        const $yusMain = document.querySelector('.yus-main')
+        $yusMain.appendChild(this.$el)
+      }
     }
   }
 }
