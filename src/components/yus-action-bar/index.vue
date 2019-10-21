@@ -2,24 +2,58 @@
   <div class="yus-action-bar"
        :class="'is-' + type"
        ref="yusActionBar">
-    <yus-tool-bar v-if="tools.length > 0"
-                  :tools="tools">
+    <yus-tool-bar v-if="action.length > 0"
+                  :tools="action">
     </yus-tool-bar>
   </div>
 </template>
 
 <script>
-
+import { mapGetters } from 'vuex'
 export default {
   name: 'yus-action-bar',
   props: {
-    tools: {
+    action: {
       type: Array,
       default: () => []
     },
     type: {
       type: String,
       default: () => 'default'
+    }
+  },
+  computed: {
+    ...mapGetters([
+      'isCollapse'
+    ])
+  },
+  // watch: {
+  //   isCollapse (val) {
+  //     this.resizeAction()
+  //   }
+  // },
+  mounted () {
+    this.$bus.$on('GLOBAL_RESIZE', this.initAction)
+    this.initAction()
+    this.resizeAction()
+  },
+  destroyed () {
+    this.$bus.$off('GLOBAL_RESIZE', this.resizeAction)
+  },
+  methods: {
+    resizeAction () {
+      if (this.type === 'fixed') {
+        const $yusMain = document.querySelector('.yus-main')
+        document.querySelector('.yus-content').style.paddingBottom = '54px'
+        console.log($yusMain.clientWidth)
+        this.$el.style.width = $yusMain.clientWidth + 'px' // 设置action-bar宽度
+      }
+    },
+    initAction () {
+      if (this.type === 'fixed') {
+        const $yusMain = document.querySelector('.yus-main')
+        $yusMain.appendChild(this.$el)
+      }
     }
   }
 }

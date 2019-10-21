@@ -1,15 +1,6 @@
 <template>
-  <div class="yus-content-page"
-       :class="'is-' + (action.type || 'default')">
-    <div class="content">
-      <slot></slot>
-      <yus-action-bar :type="action.type"
-                      v-if="action.tools.length > 0 && !action.type"
-                      :tools="action.tools"></yus-action-bar>
-    </div>
-    <yus-action-bar :type="action.type"
-                    v-if="action.tools.length > 0 && action.type === 'fixed'"
-                    :tools="action.tools"></yus-action-bar>
+  <div class="yus-content-page">
+    <slot></slot>
   </div>
 </template>
 
@@ -47,15 +38,5 @@ export default {
 .yus-content-page {
   position: relative;
   padding: 12px 12px 2px 12px;
-
-  &.is-fixed {
-    height: 100%;
-    padding: 0;
-    .content {
-      height: 100%;
-      overflow-y: auto;
-      padding: 12px 12px 58px 12px;
-    }
-  }
 }
 </style>

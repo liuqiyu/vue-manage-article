@@ -1,5 +1,5 @@
 <template>
-  <yus-content-page :action="action">
+  <yus-content-page>
     <yus-content-row>
       <yus-content-cell :title="'使用Keep-alive实现缓存'">
         <el-tabs type="border-card"
@@ -90,6 +90,8 @@
         </el-tabs>
       </yus-content-cell>
     </yus-content-row>
+    <yus-action-bar :type="type"
+                    :action="action"></yus-action-bar>
   </yus-content-page>
 </template>
 
@@ -117,14 +119,12 @@ export default {
         }
       ],
       activeName: 'sz',
-      action: {
-        type: 'fixed',
-        tools: [
-          {
-            label: '返回列表'
-          }
-        ]
-      }
+      type: 'fixed',
+      action: [
+        {
+          label: '返回列表'
+        }
+      ]
     }
   },
   watch: {
