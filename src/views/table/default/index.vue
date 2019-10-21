@@ -6,7 +6,6 @@
                      :tables="tables"></yus-query-table>
     <!--弹出框-->
     <yus-dialog v-bind="dialogOption"
-                @close="closeDynamicDialog"
                 :view.sync="dialogOption.view"
                 :visible.sync="dialogOption.show">
       <component :is="dialogOption.view"
