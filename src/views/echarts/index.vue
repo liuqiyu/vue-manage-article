@@ -1,22 +1,25 @@
 <template>
   <yus-content-page>
-    <yus-button type="primary">按钮</yus-button>
-    <child @hook:mounted="childMounted"></child>
+    {{a}}
+    <yus-button type="primary"
+                @click="submit">按钮</yus-button>
   </yus-content-page>
 </template>
 
 <script>
-import child from './child'
 export default {
   name: 'echarts',
-  components: {
-    child
+  data () {
+    return {
+      a: 1
+    }
   },
   mounted () {
   },
   methods: {
-    childMounted () {
-      console.log('childMounted')
+    submit () {
+      // this.a += 1
+      this.$http.post('/api/editor/add', { a: this.a })
     }
   }
 }

@@ -21,16 +21,20 @@ const removeHttpPending = (config, isRemove = true) => {
   }
   console.log(httpPending, 'httpPending')
   let key = config.url.includes(host) ? config.url.replace(host, '') : config.url
+  console.log(key)
   let val = typeof config.data === 'object' ? JSON.stringify(config.data) : config.data
   if (httpPending[key] === val) {
+    console.log('isRemove', isRemove)
     if (isRemove) {
       delete httpPending[key]
     } else {
       console.warn(`[${key}]: repeated http request`) // 重复提交
     }
+    // delete httpPending[key]
     return true
   }
   httpPending[key] = val
+
   return false
 }
 
@@ -42,10 +46,8 @@ service.interceptors.request.use(
     config.data = config.data || {}
 
     // 防止重复提交
-    if (config.method === 'post') {
-      if (removeHttpPending(config, false)) {
-        config.cancelToken = CancelToken
-      }
+    if (removeHttpPending(config, false)) {
+      config.cancelToken = CancelToken
     }
 
     return config
@@ -72,13 +74,11 @@ service.interceptors.response.use(
   },
   error => {
     removeHttpPending(error.config)
-    if (error.message) {
-      Message({
-        message: error.message,
-        type: 'error',
-        duration: 2500
-      })
-    }
+    Message({
+      message: error.message,
+      type: 'error',
+      duration: 2500
+    })
     return Promise.reject(error)
   }
 )
