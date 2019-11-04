@@ -20,7 +20,8 @@
     <div class="collapse-trigger"
          @click="menuTrigger">
       <span ref="collapseIcon"
-            class="iconfont icon-shouqi"></span>
+            class="iconfont"
+            :class="collapseIcon"></span>
     </div>
   </div>
 </template>
@@ -49,11 +50,22 @@ export default {
       return variables
     }
   },
+  data () {
+    return {
+      collapseIcon: 'icon-daohangshouqi-'
+    }
+  },
   methods: {
     ...mapMutations([
       'IS_COLLAPSE'
     ]),
     menuTrigger () {
+      console.log(this.isCollapse)
+      if (this.isCollapse) {
+        this.collapseIcon = 'icon-daohangshouqi-'
+      } else {
+        this.collapseIcon = 'icon-daohangzhankai-'
+      }
       this.IS_COLLAPSE()
     }
   }
