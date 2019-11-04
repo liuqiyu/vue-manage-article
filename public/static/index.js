@@ -1,3 +1,9 @@
-const a = 1233
+function test (a, b) {
+  return a + b
+}
 
-export default a
+const vv = test(1, 3)
+
+console.log(vv)
+
+export default test

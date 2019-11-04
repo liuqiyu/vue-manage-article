@@ -1,4 +1,11 @@
+@import "~@/style/variable";
+
 .yus-admin {
+  .el-scrollbar__bar.is-horizontal {
+    display: none !important;
+    background: red;
+  }
+
   .hideMenu {
     .yus-menu {
       width: 64px !important;
@@ -32,6 +39,23 @@
 
       >.el-submenu__icon-arrow {
         display: none;
+      }
+    }
+  }
+
+  /deep/ .el-scrollbar {
+    height: 100%;
+    flex: 1;
+
+    .scrollbar-wrapper {
+      overflow-x: hidden !important;
+
+      .menu-wrapper {
+        height: 100%;
+      }
+
+      .menu-wrapper>.menu-item-wrapper {
+        border-bottom: 1px solid $menuBorderColor;
       }
     }
   }

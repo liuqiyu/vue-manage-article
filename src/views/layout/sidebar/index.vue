@@ -69,22 +69,7 @@ export default {
   height: 100%;
   display: flex;
   flex-direction: column;
-  /deep/ .el-scrollbar {
-    height: 100%;
-    flex: 1;
-    .scrollbar-wrapper {
-      overflow-x: hidden !important;
-      .is-horizontal {
-        display: none;
-      }
-      .menu-wrapper {
-        height: 100%;
-      }
-      .menu-wrapper > .menu-item-wrapper {
-        border-bottom: 1px solid $menuBorderColor;
-      }
-    }
-  }
+
   .collapse-trigger {
     position: relative;
     flex: none;
