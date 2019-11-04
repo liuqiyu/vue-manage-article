@@ -28,7 +28,7 @@
             <el-button type="text"
                        icon="iconfont icon-zhongzhi"
                        @click="onReset">重置</el-button>
-            <el-button v-if="needControl || false"
+            <el-button v-if="(needControl && lineFeed) || false"
                        type="text"
                        @click="onControl">
               {{status ? '展开' : '收起'}}
@@ -55,14 +55,15 @@ export default {
   data () {
     return {
       model: {},
-      lineFeed: false,
-      needControl: false,
-      status: 'close'
+      lineFeed: false, // 换行
+      needControl: false, // 需要控制的按钮
+      status: true
     }
   },
-  created () {
+  mounted () {
     this.initForm()
     this.__resizeHandler = () => {
+      this.status = true
       this.formItemControl()
     }
     window.addEventListener('resize', this.__resizeHandler)
@@ -110,12 +111,13 @@ export default {
     formItemControl () {
       if (!this.status) {
         this.formFields.forEach((item, index) => {
-          this.$set(this.formFields[index], 'show', true)
+          this.$set(this.formFields[index], 'show', !this.formFields[index].hidden)
         })
         return false
       }
       let total = 0
       this.formFields.forEach((item, index) => {
+        if (this.formFields[index].hidden) return false
         if (document.body.clientWidth >= 1920) {
           total += item.xl
         } else {
@@ -123,14 +125,12 @@ export default {
         }
 
         if (total + 4 > 24) {
-          this.needControl = true
-          this.status = 'close'
           this.$set(this.formFields[index], 'show', false)
+          this.needControl = true
           this.lineFeed = true
         } else {
-          this.needControl = false
-          this.status = 'close'
           this.$set(this.formFields[index], 'show', true)
+          this.needControl = false
           this.lineFeed = false
         }
       })

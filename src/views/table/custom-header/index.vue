@@ -38,6 +38,7 @@ export default {
       formFields: [
         {
           label: '姓名',
+          hidden: true,
           type: 'text',
           placeholder: '请输入姓名',
           columnName: 'text'
