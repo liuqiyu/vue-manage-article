@@ -1,8 +1,7 @@
 <template>
   <yus-content-page>
     <el-tabs class="clipboard"
-             v-model="activeName"
-             @tab-click="handleClick">
+             v-model="activeName">
       <el-tab-pane label="单击复制"
                    name="click">
         <el-input placeholder="请单击复制"
