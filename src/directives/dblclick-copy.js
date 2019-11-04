@@ -1,6 +1,4 @@
-import {
-  Message
-} from 'element-ui'
+import { Message } from 'element-ui'
 
 export default {
   /*
@@ -8,9 +6,7 @@ export default {
     el: 作用的 dom 对象
     value: 传给指令的值，也就是我们要 copy 的值
   */
-  bind (el, {
-    value
-  }) {
+  bind (el, { value }) {
     el.$value = value // 用一个全局属性来存传进来的值，因为这个值在别的钩子函数里还会用到
     el.handler = () => {
       if (!el.$value) {
@@ -41,9 +37,7 @@ export default {
     el.addEventListener('dblclick', el.handler)
   },
   // 当传进来的值更新的时候触发
-  componentUpdated (el, {
-    value
-  }) {
+  componentUpdated (el, { value }) {
     el.$value = value
   },
   // 指令与元素解绑的时候，移除事件绑定
