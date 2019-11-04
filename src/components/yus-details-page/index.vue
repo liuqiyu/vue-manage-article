@@ -1,10 +1,17 @@
+<!--
+ * @Descripttion: update back icon
+ * @Author: liuqiyu
+ * @Date: 2019-10-09 14:47:52
+ * @LastEditors: liuqiyu
+ * @LastEditTime: 2019-11-04 15:48:34
+ -->
 <template>
-  <div class="details-page">
+  <div class="yus-details-page">
     <header>
       <div class="left-bar">
         <router-link v-if="options && options.back"
                      tag="span"
-                     class="back iconfont icon-fanhui"
+                     class="back iconfont icon-fanhui1"
                      replace
                      :to="options.back"></router-link>
         <h3 class="title">
@@ -52,10 +59,10 @@ export default {
 
 <style lang="scss" scoped>
 @import "~@/style/variable";
-.details-page {
+.yus-details-page {
   background: #ffffff;
   border: 1px solid $borderColor;
-  padding: 12px 12px 2px 12px;
+  // padding: 12px 12px 2px 12px;
   header {
     padding: 0 20px;
     height: 50px;
