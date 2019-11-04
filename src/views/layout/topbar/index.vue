@@ -3,8 +3,7 @@
     <div class="logo">
       <img src="@/assets/images/logo.png"
            alt="">
-      <h1 class="title"
-          v-if="!isCollapse">
+      <h1 class="title">
         Vue Admin Pro
       </h1>
     </div>
@@ -13,18 +12,12 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex'
 import rightBar from './right-bar'
 
 export default {
   name: 'index',
   components: {
     rightBar
-  },
-  computed: {
-    ...mapGetters([
-      'isCollapse'
-    ])
   }
 }
 </script>
