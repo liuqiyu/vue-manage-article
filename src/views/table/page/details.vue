@@ -1,5 +1,5 @@
 <template>
-  <div v-loading="loading">
+  <yus-content-page v-loading="loading">
     <yus-details-page :options="options"
                       :tools="tools">
       <el-form :model="ruleForm"
@@ -47,7 +47,7 @@
         </el-row>
       </el-form>
     </yus-details-page>
-  </div>
+  </yus-content-page>
 </template>
 
 <script>
