@@ -1,5 +1,6 @@
 .yus-admin {
   .el-table {
+
     // 右侧边框
     &.el-table--group::after,
     &.el-table--border::after,
@@ -7,6 +8,7 @@
       z-index: 6;
       background-color: #dfe9fc !important;
     }
+
     &.el-table--border {
       border-color: #dfe9fc;
     }
@@ -54,6 +56,7 @@
       font-size: 24px;
       color: #53607e;
     }
+
     p {
       color: #53607e;
       font-size: 14px;

@@ -1,10 +1,17 @@
+/*
+ * @Descripttion: change name
+ * @Author: liuqiyu
+ * @Date: 2019-10-09 14:47:52
+ * @LastEditors: liuqiyu
+ * @LastEditTime: 2019-11-04 17:21:02
+ */
 import Vue from 'vue'
 
 // width 单位px
 // 最小宽度360，最大宽度1200，计算公式：16*2 + 160*N + (N-1)*8
 // 2: 360, 3: 528, 4: 696, 5: 864, 6: 1032, 7: 1200
 
-const vDialog = Vue.component('yus-dialog', {
+const YusDialog = Vue.component('yus-dialog', {
   functional: true,
   render (h, self) {
     self.props.width = self.props.width || '360px'
@@ -26,7 +33,11 @@ const vDialog = Vue.component('yus-dialog', {
       self.props.closeOnPressEscape = false
     }
     let directives = self.data.directives || []
-    self.data.directives = [...directives, { name: 'drag' }, { name: 'next' }]
+    self.data.directives = [...directives, {
+      name: 'drag'
+    }, {
+      name: 'next'
+    }]
     self.props.appendToBody = true
     let onClose = self.listeners.close
     let $on = {
@@ -40,8 +51,15 @@ const vDialog = Vue.component('yus-dialog', {
         }
       }
     }
-    self.data.on = { ...self.data.on, ...self.listeners, ...$on }
-    self.data.attrs = { ...self.data.attrs, ...self.props }
+    self.data.on = {
+      ...self.data.on,
+      ...self.listeners,
+      ...$on
+    }
+    self.data.attrs = {
+      ...self.data.attrs,
+      ...self.props
+    }
     return h(
       'el-dialog',
       self.data,
@@ -67,4 +85,4 @@ const vDialog = Vue.component('yus-dialog', {
   }
 })
 
-export default vDialog
+export default YusDialog

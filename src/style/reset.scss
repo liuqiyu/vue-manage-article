@@ -77,6 +77,11 @@ td {
   margin: 0;
 }
 
+html {
+  height: 100%;
+  box-sizing: border-box;
+}
+
 body {
   min-width: 1440px;
   overflow: auto;
