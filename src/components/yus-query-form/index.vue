@@ -62,6 +62,10 @@ export default {
   },
   created () {
     this.initForm()
+    this.__resizeHandler = () => {
+      this.formItemControl()
+    }
+    window.addEventListener('resize', this.__resizeHandler)
   },
   components: {
     formItem
@@ -131,6 +135,9 @@ export default {
         }
       })
     }
+  },
+  beforeDestroy () {
+    window.removeEventListener('resize', this.__resizeHandler)
   }
 }
 </script>
