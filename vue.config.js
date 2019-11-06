@@ -1,3 +1,10 @@
+/*
+ * @Description: webpack 配置
+ * @Author: liuqiyu
+ * @Date: 2019-10-09 14:47:52
+ * @LastEditors: liuqiyu
+ * @LastEditTime: 2019-11-06 16:06:05
+ */
 const path = require('path')
 const webpack = require('webpack')
 const defaultSettings = require('./src/settings.js')
@@ -14,6 +21,7 @@ module.exports = {
   publicPath: './',
   outputDir: 'dist',
   // assetsDir: 'static',
+  productionSourceMap: false, // 关闭map配置
   devServer: {
     port, // 代理端口
     open: true, // 是否自动打开浏览器
