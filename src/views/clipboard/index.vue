@@ -68,11 +68,8 @@ export default {
             console.log('第一休息' + time + '秒')
           }, time * 1000)
         }
-
         this.taskList.push(task)
-
         console.log('sleep')
-
         return this
       }
 

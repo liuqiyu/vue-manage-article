@@ -1,3 +1,10 @@
+/*
+ * @Description: main
+ * @Author: liuqiyu
+ * @Date: 2019-10-09 14:47:52
+ * @LastEditors: liuqiyu
+ * @LastEditTime: 2019-11-06 16:42:12
+ */
 import Vue from 'vue'
 import '@babel/polyfill'
 import ElementUI from 'element-ui'
@@ -12,6 +19,8 @@ import http from './utils/http'
 import * as filters from '@/utils/filter'
 import './permission'
 import './mock/index'
+// import * as api from './api'
+// console.log(api)
 
 Object.keys(filters).forEach(key => {
   Vue.filter(key, filters[key])
@@ -34,6 +43,7 @@ Vue.use(ElementUI, {
 Vue.use(VUI)
 
 Vue.prototype.$http = http
+// Vue.prototype.$api = api
 
 new Vue({
   router,

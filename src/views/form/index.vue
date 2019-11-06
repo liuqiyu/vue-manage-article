@@ -1,3 +1,10 @@
+<!--
+ * @Description:
+ * @Author: liuqiyu
+ * @Date: 2019-10-11 11:13:04
+ * @LastEditors: liuqiyu
+ * @LastEditTime: 2019-11-06 16:11:55
+ -->
 <template>
   <yus-content-page>
     <yus-content-row>
@@ -36,7 +43,7 @@
 </template>
 
 <script>
-
+// import { getTest } from '@/api'
 export default {
   name: 'asp-form',
   data () {
@@ -81,6 +88,9 @@ export default {
     resetForm () {
       this.$refs['form'].resetFields()
     }
+  },
+  mounted () {
+    // getTest()
   }
 }
 </script>
