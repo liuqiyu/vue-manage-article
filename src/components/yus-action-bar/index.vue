@@ -27,18 +27,33 @@ export default {
       'isCollapse'
     ])
   },
-  // watch: {
-  //   isCollapse (val) {
-  //     this.resizeAction()
-  //   }
-  // },
   mounted () {
     this.$bus.$on('GLOBAL_RESIZE', this.initAction)
     this.initAction()
     this.resizeAction()
   },
-  destroyed () {
+  activated () {
+    this.$bus.$on('GLOBAL_RESIZE', this.initAction)
+    this.initAction()
+    this.resizeAction()
+  },
+  deactivated () {
+    this.destroyAction()
     this.$bus.$off('GLOBAL_RESIZE', this.resizeAction)
+    // if appendToBody is true, remove DOM node after destroy
+    console.log(this.$el.parentNode)
+    if (this.$el && this.$el.parentNode) {
+      this.$el.parentNode.removeChild(this.$el)
+    }
+  },
+  destroyed () {
+    this.destroyAction()
+    this.$bus.$off('GLOBAL_RESIZE', this.resizeAction)
+    // if appendToBody is true, remove DOM node after destroy
+    console.log(this.$el.parentNode)
+    if (this.$el && this.$el.parentNode) {
+      this.$el.parentNode.removeChild(this.$el)
+    }
   },
   methods: {
     resizeAction () {
@@ -53,6 +68,12 @@ export default {
       if (this.type === 'fixed') {
         const $yusMain = document.querySelector('.yus-main')
         $yusMain.appendChild(this.$el)
+      }
+    },
+    destroyAction () {
+      if (this.type === 'fixed') {
+        const $yusMain = document.querySelector('.yus-main')
+        console.log($yusMain)
       }
     }
   }
