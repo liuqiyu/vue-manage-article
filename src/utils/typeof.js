@@ -3,7 +3,7 @@
  * @Author: liuqiyu
  * @Date: 2019-11-07 14:21:56
  * @LastEditors: liuqiyu
- * @LastEditTime: 2019-11-07 14:27:35
+ * @LastEditTime: 2019-11-07 14:41:51
  */
 
 // 是否数组
@@ -44,4 +44,9 @@ export const isNull = (obj) => {
 // 是否Undefined
 export const isUndefined = (obj) => {
   return Object.prototype.toString.call(obj) === '[object Undefined]'
+}
+
+// 是否Symbol
+export const isSymbol = (obj) => {
+  return Object.prototype.toString.call(obj) === '[object Symbol]'
 }
