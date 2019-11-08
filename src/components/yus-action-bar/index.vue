@@ -40,27 +40,18 @@ export default {
   deactivated () {
     this.destroyAction()
     this.$bus.$off('GLOBAL_RESIZE', this.resizeAction)
-    // if appendToBody is true, remove DOM node after destroy
-    console.log(this.$el.parentNode)
-    if (this.$el && this.$el.parentNode) {
-      this.$el.parentNode.removeChild(this.$el)
-    }
+    this.destroyAction()
   },
   destroyed () {
     this.destroyAction()
     this.$bus.$off('GLOBAL_RESIZE', this.resizeAction)
-    // if appendToBody is true, remove DOM node after destroy
-    console.log(this.$el.parentNode)
-    if (this.$el && this.$el.parentNode) {
-      this.$el.parentNode.removeChild(this.$el)
-    }
+    this.destroyAction()
   },
   methods: {
     resizeAction () {
       if (this.type === 'fixed') {
         const $yusMain = document.querySelector('.yus-main')
         document.querySelector('.yus-content').style.paddingBottom = '54px'
-        console.log($yusMain.clientWidth)
         this.$el.style.width = $yusMain.clientWidth + 'px' // 设置action-bar宽度
       }
     },
@@ -72,8 +63,11 @@ export default {
     },
     destroyAction () {
       if (this.type === 'fixed') {
-        const $yusMain = document.querySelector('.yus-main')
-        console.log($yusMain)
+        document.querySelector('.yus-content').style.paddingBottom = 0
+        // if appendToBody is true, remove DOM node after destroy
+        if (this.$el && this.$el.parentNode) {
+          this.$el.parentNode.removeChild(this.$el)
+        }
       }
     }
   }
