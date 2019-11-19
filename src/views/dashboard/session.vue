@@ -1,6 +1,22 @@
+<!--
+ * @Description:
+ * @Author: liuqiyu
+ * @Date: 2019-11-14 17:14:57
+ * @LastEditors: liuqiyu
+ * @LastEditTime: 2019-11-19 11:39:36
+ -->
 <template>
-  <div class="chart-session"
-       ref="chart"></div>
+  <el-card class="box-card console-wrapper">
+    <div slot="header"
+         class="clearfix">
+      <span>会话数</span>
+    </div>
+    <div class="chart-wrapper">
+      <div class="chart-session"
+           ref="chart"></div>
+    </div>
+  </el-card>
+
 </template>
 
 <script>
@@ -66,5 +82,11 @@ export default {
 .chart-session {
   width: 100%;
   height: 100%;
+}
+.chart-wrapper {
+  width: 100%;
+  padding: 20px;
+  height: 250px;
+  background: #fff;
 }
 </style>

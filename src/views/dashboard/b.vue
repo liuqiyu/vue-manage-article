@@ -3,13 +3,13 @@
  * @Author: liuqiyu
  * @Date: 2019-11-14 17:14:57
  * @LastEditors: liuqiyu
- * @LastEditTime: 2019-11-19 11:39:27
+ * @LastEditTime: 2019-11-19 11:39:36
  -->
 <template>
   <el-card class="box-card console-wrapper">
     <div slot="header"
          class="clearfix">
-      <span>用户量</span>
+      <span>b</span>
     </div>
     <div class="chart-wrapper">
       <div class="chart-session"
@@ -23,7 +23,7 @@
 import echarts from 'echarts'
 
 export default {
-  name: 'session',
+  name: 'b',
   mounted () {
     this.initCharts()
   },
@@ -31,12 +31,18 @@ export default {
     return {
       chart: null,
       options: {
-        color: ['#3398DB'],
         tooltip: {
           trigger: 'axis',
-          axisPointer: { // 坐标轴指示器，坐标轴触发有效
-            type: 'shadow' // 默认为直线，可选为：'line' | 'shadow'
+          axisPointer: {
+            type: 'cross',
+            label: {
+              backgroundColor: '#6a7985'
+            }
           }
+        },
+        xAxis: {
+          type: 'category',
+          data: ['星期一', '星期二', '星期三', '星期四', '星期五', '星期六', '星期天']
         },
         grid: {
           top: '5%',
@@ -45,28 +51,14 @@ export default {
           bottom: 0,
           containLabel: true
         },
-        xAxis: [
-          {
-            type: 'category',
-            data: ['一月', '二月', '三月', '四月', '五月', '六月', '七月', '八月', '九月', '十月', '十一月', '十二月'],
-            axisTick: {
-              alignWithLabel: true
-            }
-          }
-        ],
-        yAxis: [
-          {
-            type: 'value'
-          }
-        ],
-        series: [
-          {
-            name: '会话数',
-            type: 'bar',
-            barWidth: '25%',
-            data: [10, 52, 200, 334, 390, 450, 500, 523, 560, 590, 650, 770]
-          }
-        ]
+        yAxis: {
+          type: 'value'
+        },
+        series: [{
+          data: [820, 932, 901, 934, 1290, 1330, 1320],
+          type: 'line',
+          smooth: true
+        }]
       }
     }
   },

@@ -22,36 +22,33 @@
       </el-row>
     </div>
 
-    <el-card class="box-card console-wrapper">
-      <div slot="header"
-           class="clearfix">
-        <span>用户量</span>
-      </div>
-      <div class="chart-wrapper">
-        <session></session>
-      </div>
-    </el-card>
+    <user></user>
+    <session></session>
 
-    <el-card class="box-card console-wrapper">
-      <div slot="header"
-           class="clearfix">
-        <span>会话数</span>
-      </div>
-      <div class="chart-wrapper">
-        <user></user>
-      </div>
-    </el-card>
+    <aa></aa>
+    <bb v-if="show"></bb>
+    <c v-if="show"></c>
+    <d v-if="show"></d>
   </div>
 </template>
 
 <script>
 import Session from './session'
 import User from './user'
+// import aa from './a'
+// import bb from './b'
+// import c from './c'
+// import d from './d'
+const aa = () => import(/* webpackChunkName: "a" */ './a')
+const bb = () => import(/* webpackChunkName: "b" */ './b')
+const c = () => import(/* webpackChunkName: "c" */ './c')
+const d = () => import(/* webpackChunkName: "d" */ './d')
 
 export default {
   name: 'dashboard',
   data () {
     return {
+      show: false,
       cardList: [
         {
           label: '用户量',
@@ -83,9 +80,20 @@ export default {
   },
   components: {
     Session,
-    User
+    User,
+    aa,
+    bb,
+    c,
+    d
   },
-  methods: {}
+  methods: {},
+  mounted () {
+    var a = document.querySelector('.yus-content')
+    a.addEventListener('scroll', () => {
+      console.log(123)
+      this.show = true
+    })
+  }
 }
 </script>
 
@@ -126,13 +134,6 @@ export default {
         }
       }
     }
-  }
-
-  .chart-wrapper {
-    width: 100%;
-    padding: 20px;
-    height: 250px;
-    background: #fff;
   }
 }
 </style>
