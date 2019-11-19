@@ -3,7 +3,7 @@
  * @Author: liuqiyu
  * @Date: 2019-10-09 14:47:52
  * @LastEditors: liuqiyu
- * @LastEditTime: 2019-11-06 16:06:05
+ * @LastEditTime: 2019-11-19 11:45:53
  */
 const path = require('path')
 const webpack = require('webpack')
@@ -73,6 +73,8 @@ module.exports = {
   },
   // 删除moment除zh-cn中文包外的其它语言包，无需在代码中手动引入zh-cn语言包。
   chainWebpack: config => {
+    // 移除 prefetch 插件
+    config.plugins.delete('prefetch')
     config
       .plugin('ignore')
       .use(new webpack.ContextReplacementPlugin(/moment[/\\]locale$/, /zh-cn$/))
