@@ -3,10 +3,13 @@
  * @Author: liuqiyu
  * @Date: 2019-10-09 14:47:52
  * @LastEditors: liuqiyu
- * @LastEditTime: 2019-11-19 11:45:53
+ * @LastEditTime: 2019-12-17 13:46:25
  */
 const path = require('path')
 const webpack = require('webpack')
+const BundleAnalyzerPlugin = require('webpack-bundle-analyzer')
+  .BundleAnalyzerPlugin
+const IS_PROD = ['production', 'prod'].includes(process.env.NODE_ENV)
 const defaultSettings = require('./src/settings.js')
 
 function resolve (dir) {
@@ -52,13 +55,13 @@ module.exports = {
         static: resolve('public/static')
       }
     },
-    // dll  为了节约编译的时间，这时间我们需要告诉 webpack 公共库文件已经编译好了，减少 webpack 对公共库的编译时间
-    plugins: [
-      new webpack.DllReferencePlugin({
-        context: process.cwd(),
-        manifest: require('./public/vendor/vendor-manifest.json')
-      })
-    ],
+    // // dll  为了节约编译的时间，这时间我们需要告诉 webpack 公共库文件已经编译好了，减少 webpack 对公共库的编译时间
+    // plugins: [
+    //   new webpack.DllReferencePlugin({
+    //     context: process.cwd(),
+    //     manifest: require('./public/vendor/vendor-manifest.json')
+    //   })
+    // ],
     performance: {
       hints: 'warning',
       // 入口起点的最大体积 整数类型（以字节为单位）
@@ -73,6 +76,14 @@ module.exports = {
   },
   // 删除moment除zh-cn中文包外的其它语言包，无需在代码中手动引入zh-cn语言包。
   chainWebpack: config => {
+    // 打包分析
+    if (IS_PROD) {
+      config.plugin('webpack-report').use(BundleAnalyzerPlugin, [
+        {
+          analyzerMode: 'static'
+        }
+      ])
+    }
     // 移除 prefetch 插件
     config.plugins.delete('prefetch')
     config
