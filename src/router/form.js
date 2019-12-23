@@ -3,7 +3,7 @@
  * @Author: liuqiyu
  * @Date: 2019-11-14 17:14:57
  * @LastEditors  : liuqiyu
- * @LastEditTime : 2019-12-23 10:29:18
+ * @LastEditTime : 2019-12-23 10:30:22
  */
 import Layout from './../views/layout'
 
@@ -31,7 +31,7 @@ export default {
       component: () =>
       import(/* webpackChunkName: "form" */ './../views/form/form-create'),
       meta: {
-        title: '111'
+        title: 'form-create'
       }
     }
   ]

@@ -1,35 +1,33 @@
 <!--
  * @Author: liuqiyu
  * @Date: 2019-12-20 10:39:54
- * @LastEditTime : 2019-12-20 20:42:38
+ * @LastEditTime : 2019-12-23 15:07:04
  * @LastEditors  : liuqiyu
  * @Description: In User Settings Edit
  * @FilePath: \pcc_front1\src\views\pcc\commodity\add\create\common\form-create\query-form.vue
  -->
 <template>
   <div class="form-create">
-    <el-form ref="validateForm" :model="model" size="mini" label-width="120px">
-      <div
-        v-for="(item, index) in formCreate.formList"
-        :name="index"
-        :key="index"
-      >
+    <el-form ref="validateForm"
+             :model="model"
+             size="mini"
+             label-width="120px">
+      <div v-for="(item, index) in formCreate.formList"
+           :name="index"
+           :key="index">
         <el-row>
-          <el-col
-            v-for="(cell, key) in item.formFields"
-            :key="key"
-            :span="cell.span || 12"
-          >
-            <form-item
-              v-show="cell.show === undefined ? true : cell.show"
-              :item="cell"
-              v-model="model[cell.columnName]"
-            >
+          <el-col v-for="(cell, key) in item.formFields"
+                  :key="key"
+                  :span="cell.span || 12">
+            <form-item v-show="cell.show === undefined ? true : cell.show"
+                       :item="cell"
+                       v-model="model[cell.columnName]">
             </form-item>
           </el-col>
         </el-row>
       </div>
     </el-form>
+    <el-button @click="onSubmit">默认按钮</el-button>
     <toolList :tool-list="formCreate.toolList"></toolList>
   </div>
 </template>
@@ -46,16 +44,16 @@ export default {
   props: {
     formCreate: {
       type: Object,
-      default: () => {}
-    },
-    formList: {
-      type: Array,
-      default: () => []
-    },
-    toolList: {
-      type: Array,
-      default: () => []
+      default: () => { }
     }
+    // formList: {
+    //   type: Array,
+    //   default: () => []
+    // },
+    // toolList: {
+    //   type: Array,
+    //   default: () => []
+    // }
   },
   data () {
     return {
@@ -63,16 +61,13 @@ export default {
     }
   },
   created () {
-    this.$nextTick(() => {
-      this.createModel()
-      // console.log(this.formFields)
-    })
+    this.createModel()
   },
   methods: {
     onSubmit () {
       this.$refs['validateForm'].validate(valid => {
         if (valid) {
-          console.log('submit!')
+          console.log(this.model)
           this.$emit('formSubmit', this.model)
         } else {
           console.log('error submit!!')
@@ -88,8 +83,9 @@ export default {
       return this.model
     },
     createModel () {
-      const ARRAY_ITEM = ['datetimerange', 'daterange']
-      this.formList.forEach(cell => {
+      const ARRAY_ITEM = ['datetimerange', 'daterange', 'checkbox-group', 'cascader']
+      console.log(this.formCreate.formList)
+      this.formCreate.formList.forEach(cell => {
         cell.formFields.forEach(item => {
           if (item.show === undefined || item.show) {
             if (ARRAY_ITEM.indexOf(item.type) >= 0 || item.multiple) {
@@ -100,9 +96,8 @@ export default {
                 item.columnName,
                 item.defaultCheckedKeys || []
               )
-              // console.log(item.defaultCheckedKeys)
             } else {
-              this.$set(this.model, item.columnName, item.defaultValue || '')
+              this.$set(this.model, item.columnName, item.defaultValue || null)
             }
           }
         })
