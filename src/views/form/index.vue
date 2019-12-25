@@ -1,99 +1,99 @@
 <!--
  * @Description:
  * @Author: liuqiyu
- * @Date: 2019-10-11 11:13:04
- * @LastEditors: liuqiyu
- * @LastEditTime: 2019-11-07 14:42:33
+ * @Date: 2019-11-14 17:14:57
+ * @LastEditors  : liuqiyu
+ * @LastEditTime : 2019-12-25 09:47:09
  -->
 <template>
-  <yus-content-page>
-    <yus-content-row>
-      <yus-content-cell :title="'使用Keep-alive实现缓存'">
-        <el-form ref="form"
-                 class="yus-table-form"
-                 :label-position="labelPosition"
-                 :model="form"
-                 :rules="rules"
-                 label-width="100px">
-          <el-row>
-            <el-col :span="12">
-              <el-form-item label="活动名称"
-                            prop="name">
-                <el-input v-model="form.name"></el-input>
-              </el-form-item>
-            </el-col>
-            <el-col :span="12">
-              <el-form-item label="活动名称"
-                            prop="name">
-                <el-input v-model="form.name"></el-input>
-              </el-form-item>
-            </el-col>
-            <el-col :span="12">
-              <el-form-item label="活动名称"
-                            prop="name">
-                <el-input v-model="form.name"></el-input>
-              </el-form-item>
-            </el-col>
-          </el-row>
-        </el-form>
-      </yus-content-cell>
-    </yus-content-row>
-    <yus-action-bar :action="action"></yus-action-bar>
-  </yus-content-page>
+  <div style="padding: 10px; height: 100%">
+    <div class="form-box">
+      <el-row>
+        <el-col :span="12"
+                style="border-right: 1px solid #e1e1e1">
+          <div class="form-wrapper">
+            <template11></template11>
+          </div>
+        </el-col>
+        <el-col :span="12">
+          <div class="json-wrapper">
+            <draggable :list="formCreate1">
+              <transition-group type="transition"
+                                :name="'flip-list'"
+                                tag="div">
+
+              </transition-group>
+            </draggable>
+          </div>
+        </el-col>
+      </el-row>
+    </div>
+  </div>
 </template>
 
 <script>
-// import { getTest } from '@/api'
+import draggable from 'vuedraggable'
+import template11 from './form-create/form-create/template'
+import { formCreate } from './form-create/form.js'
+
 export default {
-  name: 'asp-form',
-  data () {
-    return {
-      labelPosition: 'right',
-      action: [
-        {
-          label: '返回列表'
-        }
-      ],
-      form: {
-        name: '',
-        region: '',
-        date1: '',
-        date2: '',
-        delivery: false,
-        type: [],
-        resource: '',
-        desc: ''
-      },
-      rules: {
-        name: [
-          { required: true, message: '请填写活动形式', trigger: 'blur' }
-        ]
-      }
+  components: {
+    template11,
+    draggable
+  },
+  computed: {
+    formCreate () {
+      return formCreate
     }
   },
-  methods: {
-    onSubmit () {
-      console.log('submit!')
-    },
-    submitForm () {
-      this.$refs['form'].validate((valid) => {
-        if (valid) {
-          alert('submit!')
-        } else {
-          console.log('error submit!!')
-          return false
-        }
-      })
-    },
-    resetForm () {
-      this.$refs['form'].resetFields()
+  data () {
+    return {
+      jsonEditor: null,
+      formCreate1: []
     }
   },
   mounted () {
-    // getTest()
+  },
+  methods: {
+    handleChange (val) {
+      console.log(val)
+    }
   }
 }
 </script>
 
 <style lang="scss" scoped>
+.form-box {
+  width: 100%;
+  height: 100%;
+  background: #fff;
+  border: 1px solid #dee8f8;
+  .el-row {
+    height: 100%;
+    .el-col {
+      height: 100%;
+    }
+  }
+  .form-wrapper {
+    height: 100%;
+    padding: 20px;
+    overflow: auto;
+  }
+  .json-wrapper {
+    height: 100%;
+    padding: 20px;
+  }
+}
+
+/deep/ .CodeMirror {
+  height: 700px;
+  min-height: 300px;
+}
+
+/deep/.CodeMirror-scroll {
+  min-height: 300px;
+}
+/deep/ .cm-s-rubyblue span.cm-string {
+  color: #f08047;
+}
 </style>

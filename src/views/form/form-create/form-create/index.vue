@@ -1,7 +1,7 @@
 <!--
  * @Author: liuqiyu
  * @Date: 2019-12-20 10:39:54
- * @LastEditTime : 2019-12-23 15:07:04
+ * @LastEditTime : 2019-12-23 16:26:36
  * @LastEditors  : liuqiyu
  * @Description: In User Settings Edit
  * @FilePath: \pcc_front1\src\views\pcc\commodity\add\create\common\form-create\query-form.vue
@@ -12,44 +12,40 @@
              :model="model"
              size="mini"
              label-width="120px">
-      <div v-for="(item, index) in formCreate.formList"
-           :name="index"
-           :key="index">
-        <el-row>
-          <el-col v-for="(cell, key) in item.formFields"
-                  :key="key"
-                  :span="cell.span || 12">
-            <form-item v-show="cell.show === undefined ? true : cell.show"
-                       :item="cell"
-                       v-model="model[cell.columnName]">
-            </form-item>
-          </el-col>
-        </el-row>
-      </div>
+      <el-row v-for="(item, index) in formList"
+              :key="index">
+        <el-col v-for="(cell, key) in item.formFields"
+                :key="key"
+                :span="cell.span || 12">
+          <form-item v-show="cell.show === undefined ? true : cell.show"
+                     :item="cell"
+                     v-model="model[cell.columnName]">
+          </form-item>
+        </el-col>
+      </el-row>
     </el-form>
-    <el-button @click="onSubmit">默认按钮</el-button>
-    <toolList :tool-list="formCreate.toolList"></toolList>
+    <!-- <toolList :tool-list="formCreate.toolList"></toolList> -->
   </div>
 </template>
 
 <script>
 import formItem from './form-item'
-import toolList from './tool-list'
+// import toolList from './tool-list'
 export default {
   name: 'FormCreate',
   components: {
-    formItem,
-    toolList
+    formItem
+    // toolList
   },
   props: {
     formCreate: {
       type: Object,
       default: () => { }
+    },
+    formList: {
+      type: Array,
+      default: () => []
     }
-    // formList: {
-    //   type: Array,
-    //   default: () => []
-    // },
     // toolList: {
     //   type: Array,
     //   default: () => []
@@ -84,8 +80,7 @@ export default {
     },
     createModel () {
       const ARRAY_ITEM = ['datetimerange', 'daterange', 'checkbox-group', 'cascader']
-      console.log(this.formCreate.formList)
-      this.formCreate.formList.forEach(cell => {
+      this.formList.forEach(cell => {
         cell.formFields.forEach(item => {
           if (item.show === undefined || item.show) {
             if (ARRAY_ITEM.indexOf(item.type) >= 0 || item.multiple) {
