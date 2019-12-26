@@ -1,3 +1,10 @@
+/*
+ * @Description:
+ * @Author: liuqiyu
+ * @Date: 2019-11-14 17:14:57
+ * @LastEditors  : liuqiyu
+ * @LastEditTime : 2019-12-26 17:29:57
+ */
 import Vue from 'vue'
 import {
   version
@@ -18,6 +25,7 @@ import YusContentCell from './yus-content-cell'
 import YusActionBar from './yus-action-bar'
 import YusThemePicker from './yus-theme-picker'
 import YusButton from './yus-button'
+// import render from './render'
 
 const components = [YusQueryTable, YusToolBar, YusQueyForm,
   YusTableList, YusDialog, YusDetailsPage,

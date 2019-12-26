@@ -2,8 +2,8 @@
  * @Descripttion: change name
  * @Author: liuqiyu
  * @Date: 2019-10-09 14:47:52
- * @LastEditors: liuqiyu
- * @LastEditTime: 2019-11-04 17:21:02
+ * @LastEditors  : liuqiyu
+ * @LastEditTime : 2019-12-26 16:29:07
  */
 import Vue from 'vue'
 
@@ -14,6 +14,8 @@ import Vue from 'vue'
 const YusDialog = Vue.component('yus-dialog', {
   functional: true,
   render (h, self) {
+    console.log(h)
+    console.log(self)
     self.props.width = self.props.width || '360px'
     if (typeof self.props.width === 'number') {
       if (self.props.width > 1) {

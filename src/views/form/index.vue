@@ -3,60 +3,49 @@
  * @Author: liuqiyu
  * @Date: 2019-11-14 17:14:57
  * @LastEditors  : liuqiyu
- * @LastEditTime : 2019-12-25 09:47:09
+ * @LastEditTime : 2019-12-26 18:44:48
  -->
 <template>
   <div style="padding: 10px; height: 100%">
     <div class="form-box">
-      <el-row>
-        <el-col :span="12"
-                style="border-right: 1px solid #e1e1e1">
-          <div class="form-wrapper">
-            <template11></template11>
-          </div>
-        </el-col>
-        <el-col :span="12">
-          <div class="json-wrapper">
-            <draggable :list="formCreate1">
-              <transition-group type="transition"
-                                :name="'flip-list'"
-                                tag="div">
-
-              </transition-group>
-            </draggable>
-          </div>
-        </el-col>
-      </el-row>
+      <AspFormCreate ref="formCreate"
+                     :form-create="formCreate"
+                     @on-tool-submit-click="submit"
+                     @on-tool-next-click="next"></AspFormCreate>
     </div>
   </div>
 </template>
 
 <script>
-import draggable from 'vuedraggable'
-import template11 from './form-create/form-create/template'
-import { formCreate } from './form-create/form.js'
-
+import AspFormCreate from './form-create'
 export default {
   components: {
-    template11,
-    draggable
-  },
-  computed: {
-    formCreate () {
-      return formCreate
-    }
+    AspFormCreate
   },
   data () {
     return {
-      jsonEditor: null,
-      formCreate1: []
+      formCreate1: {}
     }
   },
-  mounted () {
+  created () {
+    this.formCreate = require('./addTab1.json')
+    setTimeout(() => {
+      this.$refs.formCreate.setOptions('a', [
+        {
+          value: 2,
+          label: 2
+        }
+      ])
+      this.$refs.formCreate.setValue('cmmdtBg', 1233)
+      this.$refs.formCreate.setProps('cmmdtBg', 'disabled', true)
+    })
   },
   methods: {
-    handleChange (val) {
-      console.log(val)
+    submit ({ model, item, type }) {
+      console.log(model, item, type)
+    },
+    next ({ model, item, type }) {
+      console.log(model, item, type)
     }
   }
 }

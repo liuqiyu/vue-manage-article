@@ -2,8 +2,8 @@
  * @Description: main
  * @Author: liuqiyu
  * @Date: 2019-10-09 14:47:52
- * @LastEditors: liuqiyu
- * @LastEditTime: 2019-11-06 16:42:12
+ * @LastEditors  : liuqiyu
+ * @LastEditTime : 2019-12-26 17:09:47
  */
 import Vue from 'vue'
 import '@babel/polyfill'

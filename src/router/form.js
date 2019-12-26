@@ -3,7 +3,7 @@
  * @Author: liuqiyu
  * @Date: 2019-11-14 17:14:57
  * @LastEditors  : liuqiyu
- * @LastEditTime : 2019-12-23 10:30:22
+ * @LastEditTime : 2019-12-26 14:28:54
  */
 import Layout from './../views/layout'
 
@@ -23,15 +23,6 @@ export default {
       import(/* webpackChunkName: "form" */ './../views/form/index'),
       meta: {
         title: 'Form'
-      }
-    },
-    {
-      path: 'form-create',
-      name: 'form-create',
-      component: () =>
-      import(/* webpackChunkName: "form" */ './../views/form/form-create'),
-      meta: {
-        title: 'form-create'
       }
     }
   ]
