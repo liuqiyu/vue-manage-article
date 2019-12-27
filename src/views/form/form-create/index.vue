@@ -1,7 +1,7 @@
 <!--
  * @Author: liuqiyu
  * @Date: 2019-12-20 10:39:54
- * @LastEditTime : 2019-12-26 18:50:28
+ * @LastEditTime : 2019-12-27 14:35:51
  * @LastEditors  : liuqiyu
  * @Description: In User Settings Edit
  * @FilePath: \pcc_front1\src\views\pcc\commodity\add\create\common\form-create\query-form.vue
@@ -70,17 +70,15 @@ export default {
     }
   },
   created () {
-    this.createModel()
+    this.initModel()
   },
   methods: {
-    onReset () {
-      this.createModel()
-      this.$emit('reset')
-    },
+    // 获取Model数据
     getModel () {
       return this.model
     },
-    createModel (formCreate) {
+    // 初始化model
+    initModel (formCreate) {
       this.formList = this.formCreate.formList || []
       this.toolList = this.formCreate.toolList || []
       this.toolList.forEach((item, index) => {
@@ -90,7 +88,8 @@ export default {
       if (this.formList.length <= 0) {
         return false
       }
-      const ARRAY_ITEM = ['datetimerange', 'daterange', 'checkbox']
+      const ARRAY_ITEM = ['datetimerange', 'checkbox']
+      const DATE_ITEM = ['datePicker', 'timePicker', 'dateTimePicker']
       this.formList.forEach((cell) => {
         cell.formFields.forEach(item => {
           if (item.show === undefined || item.show) {
@@ -101,7 +100,12 @@ export default {
             } else if (item.type === 'selectTree') {
               this.$set(this.model, item.columnName, item.defaultCheckedKeys || [])
             } else {
-              this.$set(this.model, item.columnName, item.defaultValue || '')
+              this.$set(this.model, item.columnName, item.defaultValue || null)
+            }
+            if (DATE_ITEM.includes(item.type)) {
+              // fix: 如果没设 value-format 或出现报错，默认 timestamp 时间戳
+              let valueFormat = item.props && item.props['value-format'] ? item.props['value-format'] : 'timestamp'
+              this.setProps(item.columnName, 'value-format', valueFormat)
             }
           }
         })

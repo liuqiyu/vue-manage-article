@@ -1,7 +1,7 @@
 <!--
  * @Author: liuqiyu
  * @Date: 2019-12-20 10:39:54
- * @LastEditTime : 2019-12-26 18:28:57
+ * @LastEditTime : 2019-12-27 14:58:31
  * @LastEditors  : liuqiyu
  * @Description: In User Settings Edit
  * @FilePath: \pcc_front1\src\views\pcc\commodity\add\create\common\form-create\query-form.vue
@@ -10,9 +10,10 @@
   <el-form-item :label="item.label"
                 :prop="item.columnName"
                 :rules="item.rules || []">
+    <!-- 文本 -->
     <div v-if="item.type === 'txt'"
          :class="item.class"
-         :style="{width: item.width || null}"
+         :style="item.style"
          class="txt">
       {{ value }}
     </div>
@@ -20,7 +21,7 @@
     <!--input 文本-->
     <el-input v-if="item.type === undefined || item.type === 'input' || item.type === 'number'"
               :class="item.class"
-              :style="{width: item.width || null}"
+              :style="item.style"
               :type="item.type === undefined ? 'text' : item.type"
               :value="value"
               v-bind="item.props"
@@ -42,7 +43,7 @@
     <!--textarea-->
     <el-input v-else-if="item.type === 'textarea'"
               :class="item.class"
-              :style="{width: item.width || null}"
+              :style="item.style"
               :value="value"
               v-bind="item.props"
               type="textarea"
@@ -52,7 +53,7 @@
     <!-- input-number -->
     <el-input-number v-if="item.type === 'inputNumber'"
                      :class="item.class"
-                     :style="{width: item.width || null}"
+                     :style="item.style"
                      :value="value"
                      v-bind="item.props"
                      @input="bindChange">
@@ -61,7 +62,7 @@
     <!--select 下拉框-->
     <el-select v-else-if="item.type === 'select'"
                :class="item.class"
-               :style="{width: item.width || null}"
+               :style="item.style"
                :value="value"
                v-bind="item.props"
                @change="bindChange">
@@ -74,42 +75,46 @@
       </el-option>
     </el-select>
 
-    <!--daterange 日期选择器-->
-    <el-date-picker v-else-if="item.type === 'daterange'"
-                    :class="item.class"
-                    :style="{width: item.width || null}"
+    <!-- TimeSelect 时间选择器 -->
+    <el-time-select v-else-if="item.type ==='timeSelect'"
                     :value="value"
-                    :picker-options="pickerOptions"
-                    type="daterange"
+                    :class="item.class"
+                    :style="item.style"
                     v-bind="item.props"
-                    @input="datePickerChange">
+                    @input="bindChange">
+    </el-time-select>
+
+    <!-- TimePicker 时间选择器 -->
+    <el-time-picker v-else-if="item.type ==='timePicker'"
+                    :value="value"
+                    :class="item.class"
+                    :style="item.style"
+                    v-bind="item.props"
+                    @input="bindChange">
+    </el-time-picker>
+
+    <!--DatePicker 日期选择器  date/week/month/year -->
+    <el-date-picker v-else-if="item.type === 'datePicker'"
+                    :class="item.class"
+                    :style="item.style"
+                    :value="value"
+                    v-bind="item.props"
+                    @input="bindChange">
     </el-date-picker>
 
-    <!--datetimerange 时间选择器-->
-    <el-date-picker v-else-if="item.type === 'datetimerange'"
+    <!--DateTimePicker 日期时间选择器-->
+    <el-date-picker v-else-if="item.type === 'dateTimePicker'"
                     :class="item.class"
-                    :style="{width: item.width || null}"
+                    :style="item.style"
                     :value="value"
-                    :picker-options="pickerOptions"
-                    type="datetimerange"
                     v-bind="item.props"
-                    @input="datePickerChange">
-    </el-date-picker>
-
-    <!--date 日期选择器  date/week/month/year -->
-    <el-date-picker v-else-if="['date', 'week', 'month', 'year'].includes(item.type)"
-                    :class="item.class"
-                    :style="{width: item.width || null}"
-                    :value="value"
-                    :type="item.type"
-                    v-bind="item.props"
-                    @input="datePickerChange">
+                    @input="bindChange">
     </el-date-picker>
 
     <!-- 多选框 -->
     <el-checkbox-group v-else-if="item.type === 'checkbox'"
                        :class="item.class"
-                       :style="{width: item.width || null}"
+                       :style="item.style"
                        :value="value"
                        v-bind="item.props"
                        @input="bindChange">
@@ -124,7 +129,7 @@
     <el-radio-group v-else-if="item.type === 'radio'"
                     :value="value"
                     :class="item.class"
-                    :style="{width: item.width || null}"
+                    :style="item.style"
                     v-bind="item.props"
                     @input="bindChange">
       <el-radio v-for="(cell, index) in item.options"
@@ -139,7 +144,7 @@
                  :value="value"
                  :options="item.options"
                  :class="item.class"
-                 :style="{width: item.width || null}"
+                 :style="item.style"
                  v-bind="item.props"
                  @change="bindChange">
     </el-cascader>
@@ -148,7 +153,7 @@
     <el-switch v-else-if="item.type === 'switch'"
                :value="value"
                :class="item.class"
-               :style="{width: item.width || null}"
+               :style="item.style"
                v-bind="item.props"
                @input="bindChange">
     </el-switch>
@@ -157,7 +162,7 @@
     <el-slider v-else-if="item.type === 'slider'"
                :value="value"
                :class="item.class"
-               :style="{width: item.width || null}"
+               :style="item.style"
                v-bind="item.props"
                @input="bindChange">
     </el-slider>
@@ -166,7 +171,7 @@
     <el-rate v-else-if="item.type === 'rate'"
              :value="value"
              :class="item.class"
-             :style="{width: item.width || null}"
+             :style="item.style"
              v-bind="item.props"
              @input="bindChange">
     </el-rate>
@@ -176,6 +181,8 @@
                       :value="value[0]"
                       :placeholder="item.placeholder"
                       type="date"
+                      :class="item.class"
+                      :style="item.style"
                       format="yyyy-MM-dd"
                       value-format="yyyy-MM-dd"
                       style="width: 46%"
@@ -186,6 +193,8 @@
                       :value="value[1]"
                       :placeholder="item.placeholder"
                       type="date"
+                      :class="item.class"
+                      :style="item.style"
                       format="yyyy-MM-dd"
                       value-format="yyyy-MM-dd"
                       style="width: 47%"
@@ -194,6 +203,7 @@
     </template>
 
     <span v-else-if="item.type === 'tips'"
+          :class="item.class"
           :style="item.style"
           class="tips">{{ item.tips }}</span>
   </el-form-item>
@@ -283,11 +293,7 @@ export default {
     },
     // 输入修改事件
     bindChange (e) {
-      console.log(e)
       this.$emit('input', e)
-    },
-    datePickerChange (val) {
-      this.bindChange(val)
     },
     handleInputClick () {
       if (this.item.on && this.item.on.length > 0) {

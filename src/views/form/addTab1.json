@@ -5,6 +5,9 @@
         "label": "业务名称：",
         "columnName": "cmmdtName",
         "class": "input-class",
+        "style": {
+          "color": "red"
+        },
         "props": {
           "placeholder": "不超过60个字符",
           "maxlength": 60,
@@ -41,10 +44,12 @@
       {
         "label": "业务背景：",
         "type": "textarea",
-        "placeholder": "不超过600个字符",
         "columnName": "cmmdtBg",
-        "span": 12,
-        "maxlength": 600
+        "props": {
+          "placeholder": "不超过600个字符",
+          "maxlength": 600
+        },
+        "span": 12
       },
       {
         "label": "下拉框",
@@ -63,6 +68,74 @@
           "label": 1,
           "value": 1
         }]
+      },
+      {
+        "label": "checkboxLabel",
+        "type": "checkbox",
+        "placeholder": "不超过600个字符",
+        "columnName": "checkboxName",
+        "span": 12,
+        "props": {
+          "placeholder": "系统自动生成"
+        },
+        "options": [{
+          "label": "你好",
+          "value": 1
+        }, {
+          "label": "再见",
+          "value": 2
+        }]
+      },
+      {
+        "label": "radio",
+        "type": "radio",
+        "placeholder": "不超过600个字符",
+        "columnName": "radio",
+        "span": 12,
+        "props": {
+          "placeholder": "系统自动生成"
+        },
+        "options": [{
+          "label": "你好",
+          "value": 1
+        }, {
+          "label": "再见",
+          "value": 2
+        }]
+      },
+      {
+        "label": "timeSelect",
+        "type": "timeSelect",
+        "placeholder": "不超过600个字符",
+        "columnName": "timeSelect",
+        "span": 12
+      },
+      {
+        "label": "timePicker",
+        "type": "timePicker",
+        "placeholder": "不超过600个字符",
+        "columnName": "timePicker",
+        "span": 12
+      },
+      {
+        "label": "datePicker",
+        "type": "datePicker",
+        "placeholder": "不超过600个字符",
+        "columnName": "datePicker",
+        "span": 12,
+        "props": {
+          "type": "daterange"
+        }
+      },
+      {
+        "label": "dateTimePicker",
+        "type": "dateTimePicker",
+        "placeholder": "不超过600个字符",
+        "columnName": "dateTimePicker",
+        "span": 12,
+        "props": {
+          "type": "datetimerange"
+        }
       }
     ]
   }],
