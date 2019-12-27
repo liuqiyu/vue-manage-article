@@ -130,7 +130,7 @@ export default {
           if (item.show === undefined || item.show) {
             if (item.columnName === columnName) {
               // 避免props不存在报错
-              if (this.formList[index].formFields[k].props) {
+              if (!this.formList[index].formFields[k].props) {
                 this.$set(this.formList[index].formFields[k], 'props', {})
               }
               this.$set(this.formList[index].formFields[k].props, key, value)
