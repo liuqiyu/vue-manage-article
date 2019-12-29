@@ -8,20 +8,16 @@
 <template>
   <div style="padding: 10px; height: 100%">
     <div class="form-box">
-      <AspFormCreate ref="formCreate"
+      <FormCreate ref="formCreate"
                      :form-create="formCreate"
                      @on-tool-submit-click="submit"
-                     @on-tool-next-click="next"></AspFormCreate>
+                     @on-tool-next-click="next"></FormCreate>
     </div>
   </div>
 </template>
 
 <script>
-import AspFormCreate from './form-create'
 export default {
-  components: {
-    AspFormCreate
-  },
   data () {
     return {
       formCreate1: {}

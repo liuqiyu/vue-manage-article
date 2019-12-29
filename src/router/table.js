@@ -20,6 +20,17 @@ export default {
     }
   },
   {
+    path: 'edit-table',
+    name: 'edit-table',
+    component: () =>
+        import(/* webpackChunkName: "table" */ './../views/table/edit-table'),
+    meta: {
+      activeMenu: '/table/page',
+      noCache: true,
+      title: '编辑表格'
+    }
+  },
+  {
     path: 'page',
     name: 'page-table',
     component: () =>
