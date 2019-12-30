@@ -45,7 +45,7 @@
 import formItem from './form-item'
 import toolList from './tool-list'
 export default {
-  name: 'AspFormCreate',
+  name: 'FormCreate',
   components: {
     formItem,
     toolList
