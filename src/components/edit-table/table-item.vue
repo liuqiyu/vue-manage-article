@@ -1,86 +1,75 @@
 <template>
-  <div class="asp-edit-table" style="width: 100%">
-    <el-form ref="form" :model="form" label-width="80px">
-      <el-table
-        :height="tableHeight"
-        :data="tableData"
-        @sort-change="sortChange"
-        @row-dblclick="rowDblClick"
-        @selection-change="handleSelectionChange"
-      >
-        <el-table-column prop="index" fixed="left" label="序号" width="50">
+  <div class="table-item"
+       style="width: 100%; height: 100%">
+    <el-form ref="edit-table-form"
+             :model="formData"
+             label-width="0">
+      <el-table :height="tableHeight"
+                :data="formData.data"
+                @sort-change="sortChange"
+                @row-dblclick="rowDblClick"
+                @selection-change="handleSelectionChange">
+        <el-table-column prop="index"
+                         fixed="left"
+                         label="序号"
+                         width="50">
         </el-table-column>
-        <el-table-column
-          v-if="options.type === 'selection'"
-          type="selection"
-          fixed="left"
-          width="50"
-        >
+
+        <el-table-column v-if="options.type === 'selection'"
+                         type="selection"
+                         fixed="left"
+                         width="50">
         </el-table-column>
+
         <template v-for="(col, i) in columns">
-          <el-table-column
-            class="table-column"
-            :sortable="col.sort ? 'custom' : false"
-            :prop="col.key"
-            :key="col.key + i"
-            :label="col.label"
-            :width="col.width"
-          >
+          <el-table-column class="table-column"
+                           :sortable="col.sort ? 'custom' : false"
+                           :prop="col.key"
+                           :key="col.key + i"
+                           :label="col.label"
+                           :render-header="renderHeader"
+                           :width="col.width">
             <template slot-scope="scope">
               <!--文本-->
-              <span v-if="col.type === undefined || col.type === 'text'">
-                <span v-if="!col.copy">{{ scope.row[col.key] }}</span>
-                <span v-else v-dblclick-copy="scope.row[col.key]">{{
-                  scope.row[col.key]
-                }}</span>
-              </span>
-              <form-item
-                v-show="cell.show === undefined ? true : cell.show"
-                :item="cell"
-                v-model="model[cell.columnName]"
-                @on-events="onFormEvents"
-              >
-              </form-item>
+              <!-- {{scope.row[col.key]}}{{scope.$index}} -->
+              <el-form-item :rules="col.rules || []"
+                            :prop="'data.' + scope.$index + '.' + col.key">
+                <el-input v-model="scope.row[col.key]"
+                          placeholder="请输入内容"></el-input>
+              </el-form-item>
             </template>
           </el-table-column>
         </template>
 
-        <el-table-column
-          v-if="operation && operation.options.length > 0"
-          header-align="left"
-          :fixed="operation.fixed"
-          :label="operation.label"
-          :width="operation.width">
+        <el-table-column v-if="operation && operation.options.length > 0"
+                         header-align="left"
+                         :fixed="operation.fixed"
+                         :label="operation.label"
+                         :width="operation.width">
           <template slot-scope="scope">
             <template v-for="(btn, i) in operation.options">
-              <el-button
-                v-if="!btn.type || btn.type === 'text'"
-                class="table-btn"
-                :key="btn.label + i"
-                :icon="btn.icon"
-                :size="btn.size || 'mini'"
-                v-auth="btn.auth || null"
-                v-show="operationShow(btn, scope.row)"
-                type="text"
-                :disabled="operationDisabled(btn, scope.row)"
-                @click.stop="handleCommand(btn, scope.row)"
-              >
+              <el-button v-if="!btn.type || btn.type === 'text'"
+                         class="table-btn"
+                         :key="btn.label + i"
+                         :icon="btn.icon"
+                         :size="btn.size || 'mini'"
+                         v-auth="btn.auth || null"
+                         v-show="operationShow(btn, scope.row)"
+                         type="text"
+                         :disabled="operationDisabled(btn, scope.row)"
+                         @click.stop="handleCommand(btn, scope.row)">
                 {{ btn.label }}
               </el-button>
-              <el-tooltip
-                v-else-if="btn.type === 'icon'"
-                class="item"
-                effect="dark"
-                v-auth="btn.auth || null"
-                :content="btn.label"
-                placement="top-start"
-                :key="btn.label + i"
-              >
-                <span
-                  class="operation-icon"
-                  :class="btn.icon"
-                  @click.stop="handleCommand(btn, scope.row)"
-                ></span>
+              <el-tooltip v-else-if="btn.type === 'icon'"
+                          class="item"
+                          effect="dark"
+                          v-auth="btn.auth || null"
+                          :content="btn.label"
+                          placement="top-start"
+                          :key="btn.label + i">
+                <span class="operation-icon"
+                      :class="btn.icon"
+                      @click.stop="handleCommand(btn, scope.row)"></span>
               </el-tooltip>
             </template>
           </template>
@@ -93,6 +82,7 @@
         </template>
       </el-table>
     </el-form>
+    <el-button @click="submit">点击</el-button>
   </div>
 </template>
 
@@ -103,7 +93,7 @@ export default {
     // 表格选项
     options: {
       type: Object,
-      default: () => {}
+      default: () => { }
     },
     // 表头
     columns: {
@@ -113,7 +103,7 @@ export default {
     // 按钮
     operation: {
       type: Object,
-      default: () => {}
+      default: () => { }
     },
     // 数据
     tableData: {
@@ -121,21 +111,60 @@ export default {
       default: () => []
     }
   },
+  mounted () {
+    this.formData.data = this.tableData
+  },
   data () {
     return {
+      form: {},
       multipleSelection: [],
-      tableHeight: '100%'
+      tableHeight: '100%',
+      formData: {
+        data: null
+      }
     }
   },
   methods: {
-    setColor (col, row) {
-      if (!col.color) {
-        return '#fff'
+    submit () {
+      this.$refs['edit-table-form'].validate((valid) => {
+        if (valid) {
+          alert('submit!')
+        } else {
+          console.log('error submit!!')
+          return false
+        }
+      })
+    },
+    renderHeader (h, { column, $index }) {
+      let label = column.label || ''
+      // let i = this.hIndex
+      let c = this.columns[$index - 2]
+      console.log(this.columns, $index)
+      console.log(c)
+      // console.log(i, c)
+      if (c && c.rules) {
+        let isRender = false
+        if (Array.isArray(c.rules)) {
+          for (let obj of c.rules) {
+            if (obj.required) {
+              isRender = true
+              break
+            }
+          }
+        } else if (c.rules.required) {
+          isRender = true
+        }
+        if (isRender) {
+          return h('span', {}, [
+            h('i', { style: { color: '#ff5555', paddingRight: '3px' } }, '*'),
+            label
+          ])
+        } else {
+          return h('span', label)
+        }
+      } else {
+        return h('span', label)
       }
-      if (typeof col.color === 'function') {
-        return col.color(row)
-      }
-      return col.color
     },
     handleCommand (btn, row) {
       if (!btn.func) {
