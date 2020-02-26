@@ -112,18 +112,24 @@ export default {
       }
       try {
         this.loading = true
-        const res = await this.$http.post(this.tables.url.method, this.queryModel)
+        let res = null
+        if (this.tables.url.type === 'GET' || this.tables.url.type === 'get') {
+          res = await this.$http.get(this.tables.url.method, this.queryModel)
+        } else if (this.tables.url.type === 'POST') {
+          res = await this.$http.post(this.tables.url.method, this.queryModel)
+        }
+
         console.log('query-table请求数据！', res)
         if (this.tables.type === 'customHeader') {
           this.tables.columns = res.header
         }
-        this.tableData = Object.freeze(res.data)
+        this.tableData = Object.freeze(res)
 
         // 请求成功后回调函数
         if (this.tables.options && typeof this.tables.options.afterHttp === 'function') {
           this.tables.options.afterHttp(this.tableData, res)
         }
-
+        this.loading = false
         this.tableData.forEach((item, index) => {
           this.$set(this.tableData[index], 'index', ((this.currentPage - 1) * this.pageSize) + (1 + index))
 

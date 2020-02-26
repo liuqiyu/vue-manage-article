@@ -1,139 +1,180 @@
 <template>
   <div class="content-container">
-    <div class="console-wrapper">
-      <el-row :gutter="40">
-        <el-col :span="6"
-                v-for="(item, index) in cardList"
-                :key="index">
-          <div class="grid-content">
-            <div class="iconfont"
-                 :class="item.icon"
-                 :style="{color: item.color}"></div>
-            <div class="desc">
-              <div class="label1">{{item.label}}</div>
-              <div class="value">
-                <countTo :startVal='0'
-                         :endVal='item.value'
-                         :duration='3000'></countTo>
-              </div>
-            </div>
-          </div>
-        </el-col>
-      </el-row>
-    </div>
-
-    <user></user>
-    <session></session>
-
-    <aa></aa>
-    <bb v-if="show"></bb>
-    <c v-if="show"></c>
-    <d v-if="show"></d>
+    <yus-query-table ref="queryTable"
+                     :form-fields="formFields"
+                     :tools="tools"
+                     :tables="tables"></yus-query-table>
+                     <!--弹出框-->
+    <yus-dialog v-bind="dialogOption"
+                :view.sync="dialogOption.view"
+                :visible.sync="dialogOption.show">
+      <component :is="dialogOption.view"
+                 :style="{height: dialogHeight}"
+                 :dialog-data="dialogData"
+                 @close="closeDynamicDialog">
+      </component>
+    </yus-dialog>
   </div>
 </template>
 
 <script>
-import Session from './session'
-import User from './user'
-// import aa from './a'
-// import bb from './b'
-// import c from './c'
-// import d from './d'
-const aa = () => import(/* webpackChunkName: "a" */ './a')
-const bb = () => import(/* webpackChunkName: "b" */ './b')
-const c = () => import(/* webpackChunkName: "c" */ './c')
-const d = () => import(/* webpackChunkName: "d" */ './d')
-
+import detailsDialog from './details-dialog'
 export default {
   name: 'dashboard',
+  components: {
+    detailsDialog
+  },
   data () {
     return {
-      show: false,
-      cardList: [
+      dialogOption: {
+        show: false,
+        view: null,
+        title: '',
+        width: '1200px'
+      },
+      formFields: [
         {
-          label: '用户量',
-          icon: 'icon-yonghu',
-          value: 1843243,
-          color: '#409EFF'
+          label: '名称',
+          placeholder: '请输入名称',
+          columnName: 'name'
         },
         {
-          label: '会话数',
-          icon: 'icon-huihua-copy',
-          value: 9232,
-          color: '#67C23A'
-
-        },
-        {
-          label: '鲜花数',
-          icon: 'icon-shouye1',
-          value: 1998,
-          color: '#F56C6C'
-        },
-        {
-          label: '点赞数',
-          icon: 'icon-dianzan',
-          value: 2999,
-          color: '#E6A23C'
+          label: '描述',
+          placeholder: '请输入描述',
+          columnName: 'description'
         }
-      ]
+      ],
+      tools: [
+        {
+          label: '刷新',
+          icon: 'iconfont icon-shuaxin1',
+          func: () => this.$refs.queryTable.loadTable()
+        },
+        {
+          label: '新增',
+          auth: 'addTable',
+          icon: 'iconfont icon-xinzeng',
+          func: () => this.handleAdd()
+        },
+        {
+          label: '删除',
+          auth: 'deleteTable',
+          icon: 'iconfont icon-shanchu',
+          disabled: () => {
+            return !this.multipleSelection.length > 0
+          },
+          func: () => this.handleDel()
+        },
+        {
+          label: '弹出表格',
+          auth: 'deleteTable',
+          icon: 'iconfont icon-biaoge',
+          func: () => this.handleTable()
+        }
+      ],
+      tables: {
+        url: {
+          type: 'get',
+          method: '/article/lists'
+        },
+        options: {
+          type: 'selection',
+          page: true,
+          // 选中后操作
+          selectionChange: row => {
+            this.multipleSelection = row
+            // console.log('选中', this.multipleSelection)
+            // if (row.length > 0)
+          }
+        },
+        columns: [
+          {
+            label: '姓名',
+            key: 'name',
+            width: '180'
+          },
+          {
+            label: '描述',
+            key: 'description',
+            width: '180'
+          },
+          {
+            label: '创建时间',
+            key: 'create_date'
+          }
+        ],
+        operation: {
+          fixed: 'right',
+          label: '操作',
+          width: '120px',
+          // 操作数量
+          options: [
+            {
+              label: '详情',
+              // icon: 'iconfont iconwenjian',
+              // type: 'icon', // icon 只是图标
+              func: row => this.handleDetail(row) // 回调
+            },
+            {
+              label: '删除',
+              // icon: 'iconfont iconwenjian',
+              // type: 'icon', // icon 只是图标
+              func: row => this.handleDelete(row) // 回调
+            }
+          ]
+        }
+      },
+      multipleSelection: []
     }
   },
-  components: {
-    Session,
-    User,
-    aa,
-    bb,
-    c,
-    d
+  methods: {
+    // 删除
+    handleDelete (row) {
+      this.$confirm('此操作将永久删除该文件, 是否继续?', '提示', {
+        confirmButtonText: '确定',
+        cancelButtonText: '取消',
+        type: 'warning'
+      }).then(() => {
+        this.$http.delete('/article/delete', {
+          data: {
+            id: row.id
+          }
+        })
+        this.$message({
+          message: '删除成功',
+          type: 'success'
+        })
+        this.$refs.queryTable.loadTable()
+      })
+    },
+    // 详情
+    handleDetail (row) {
+      this.showDynamicDialog('detailsDialog', '详情', '600px')
+    },
+    showDynamicDialog (view, title, width = '1200px') {
+      this.dialogOption.show = true
+      this.dialogOption.view = view
+      this.dialogOption.title = title
+      this.dialogOption.width = width
+    },
+    closeDynamicDialog (boolean) {
+      if (boolean) {
+        this.$refs.queryTable.loadTable()
+      }
+      this.dialogOption.show = false
+      this.dialogOption.view = null
+      this.dialogOption.title = null
+      this.dialogOption.width = 0
+    }
   },
-  methods: {},
   mounted () {
-    var a = document.querySelector('.yus-content')
-    a.addEventListener('scroll', () => {
-      console.log(123)
-      this.show = true
-    })
   }
 }
 </script>
 
 <style scoped lang="scss">
 .content-container {
-  padding: 30px !important;
-  .console-wrapper {
-    margin-bottom: 20px;
-    .grid-content {
-      width: 100%;
-      height: 100px;
-      background-color: #fff;
-      display: flex;
-      flex-direction: row;
-      justify-content: space-between;
-      align-items: center;
-      padding: 0 30px;
-      -webkit-box-shadow: 4px 4px 40px rgba(0, 0, 0, 0.05);
-      box-shadow: 4px 4px 40px rgba(0, 0, 0, 0.05);
-      border-color: rgba(0, 0, 0, 0.05);
-      .iconfont {
-        font-size: 40px;
-        font-weight: bolder;
-        cursor: pointer;
-        color: rgb(70, 118, 229);
-      }
-      .desc {
-        .label1 {
-          font-size: 16px;
-          color: #999;
-          padding: 5px 0;
-        }
-        .value {
-          font-size: 24px;
-          font-weight: bolder;
-          padding: 5px 0;
-          color: #666;
-        }
-      }
-    }
-  }
+  padding: 20px !important;
+  height: 100%;
 }
 </style>

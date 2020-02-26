@@ -7,7 +7,7 @@ import {
 } from './../config'
 
 const service = axios.create({
-  baseURL: host,
+  baseURL: host + '/api',
   timeout: 20000
   // headers: { format: 'JSON' }
 })
@@ -60,7 +60,7 @@ service.interceptors.response.use(
     removeHttpPending(response.config)
 
     // 返回处理
-    if (res.code !== 200) {
+    if (res.status !== 200) {
       Message({
         message: res.message,
         type: 'error',
