@@ -4,7 +4,7 @@
       <img src="@/assets/images/logo.png"
            alt="">
       <h1 class="title">
-        Vue Admin Pro
+        文章管理系统
       </h1>
     </div>
     <right-bar></right-bar>
@@ -23,7 +23,7 @@ export default {
 </script>
 
 <style scoped lang="scss">
-@import "./../../../style/variable";
+@import "@/style/variable";
 .top-bar {
   width: 100%;
   display: flex;
@@ -35,8 +35,8 @@ export default {
     display: flex;
     flex-direction: row;
     align-items: center;
-    color: #fff;
-    font-size: 16px;
+    color: #f1f1f1;
+    font-size: 20px;
     // font-family: "幼圆";
     img {
       width: 30px;

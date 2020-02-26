@@ -18,7 +18,7 @@ function resolve (dir) {
 
 const name = defaultSettings.title || 'vue Admin Pro' // page title
 
-const port = 9420 // dev port
+const port = 7002 // dev port
 
 module.exports = {
   publicPath: './',

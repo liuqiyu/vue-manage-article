@@ -1,6 +1,6 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import Layout from './../views/layout'
+import Layout from './../layout'
 import store from './../store'
 import { getRoutes } from './../utils/router'
 import menuSort from './../utils/menu-sort'

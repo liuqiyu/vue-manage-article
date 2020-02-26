@@ -18,21 +18,10 @@ import YusToolBar from './yus-tool-bar'
 import YusQueyForm from './yus-query-form'
 import YusTableList from './yus-query-table/yus-table-list'
 import YusDialog from './yus-dialog'
-import YusDetailsPage from './yus-details-page'
-import YusContentPage from './yus-content-page'
-import YusContentRow from './yus-content-row'
-import YusContentCell from './yus-content-cell'
-import YusActionBar from './yus-action-bar'
 import YusThemePicker from './yus-theme-picker'
-import YusButton from './yus-button'
-import formCreate from './form-create'
-import formItem from './form-create/form-item'
-import editTable from './edit-table'
 
 const components = [YusQueryTable, YusToolBar, YusQueyForm,
-  YusTableList, YusDialog, YusDetailsPage,
-  YusContentPage, YusContentRow, YusContentCell,
-  YusActionBar, YusThemePicker, YusButton, formCreate, formItem, editTable
+  YusTableList, YusDialog, YusThemePicker
 ]
 
 const setPrototype = () => {
