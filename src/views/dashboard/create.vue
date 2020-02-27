@@ -6,7 +6,7 @@
                ref="ruleForm"
                label-width="60px"
                class="demo-ruleForm">
-        <el-form-item label="标题"
+        <el-form-item label="标题 "
                       prop="name">
           <el-input v-model="ruleForm.name"></el-input>
         </el-form-item>
@@ -28,7 +28,7 @@
 
 <script>
 export default {
-  name: 'test-dialog',
+  name: 'create',
   props: {
     dialogData: {
       type: Object
@@ -38,26 +38,11 @@ export default {
     return {
       ruleForm: {
         name: '',
-        nickname: '',
-        age: '',
-        gender: '',
-        address: ''
+        description: ''
       },
       rules: {
         name: [
           { required: true, message: '请输入姓名', trigger: 'blur' }
-        ],
-        nickname: [
-          { required: true, message: '请输入昵称', trigger: 'blur' }
-        ],
-        age: [
-          { required: true, message: '请输入年龄', trigger: 'blur' }
-        ],
-        gender: [
-          { required: true, message: '请选择性别', trigger: 'blur' }
-        ],
-        address: [
-          { required: true, message: '请输入地址', trigger: 'blur' }
         ]
       }
     }
@@ -67,13 +52,22 @@ export default {
   },
   methods: {
     confirm () {
-      this.$refs['ruleForm'].validate((valid) => {
+      this.$refs['ruleForm'].validate(async (valid) => {
         if (valid) {
-          this.$emit('close')
-          this.$message({
-            message: `${this.dialogData.label}成功!`,
-            type: 'success'
-          })
+          try {
+            const res = await this.$http.post('/article/create', this.ruleForm)
+            console.log(res)
+            this.$emit('close', true)
+            this.$message({
+              message: `新增成功!`,
+              type: 'success'
+            })
+          } catch (e) {
+            this.$message({
+              message: `新增失败!`,
+              type: 'error'
+            })
+          }
         } else {
           return false
         }

@@ -9,7 +9,6 @@
                 :view.sync="dialogOption.view"
                 :visible.sync="dialogOption.show">
       <component :is="dialogOption.view"
-                 :style="{height: dialogHeight}"
                  :dialog-data="dialogData"
                  @close="closeDynamicDialog">
       </component>
@@ -18,11 +17,13 @@
 </template>
 
 <script>
-import detailsDialog from './details-dialog'
+import create from './create'
+import detail from './detail'
 export default {
   name: 'dashboard',
   components: {
-    detailsDialog
+    create,
+    detail
   },
   data () {
     return {
@@ -32,6 +33,7 @@ export default {
         title: '',
         width: '1200px'
       },
+      dialogData: {},
       formFields: [
         {
           label: '名称',
@@ -64,12 +66,6 @@ export default {
             return !this.multipleSelection.length > 0
           },
           func: () => this.handleDel()
-        },
-        {
-          label: '弹出表格',
-          auth: 'deleteTable',
-          icon: 'iconfont icon-biaoge',
-          func: () => this.handleTable()
         }
       ],
       tables: {
@@ -128,6 +124,10 @@ export default {
     }
   },
   methods: {
+    // 新增
+    handleAdd () {
+      this.showDynamicDialog('create', '新增', '600px')
+    },
     // 删除
     handleDelete (row) {
       this.$confirm('此操作将永久删除该文件, 是否继续?', '提示', {
@@ -149,7 +149,8 @@ export default {
     },
     // 详情
     handleDetail (row) {
-      this.showDynamicDialog('detailsDialog', '详情', '600px')
+      this.$set(this.dialogData, 'id', row.id)
+      this.showDynamicDialog('detail', '详情', '600px')
     },
     showDynamicDialog (view, title, width = '1200px') {
       this.dialogOption.show = true
@@ -166,8 +167,6 @@ export default {
       this.dialogOption.title = null
       this.dialogOption.width = 0
     }
-  },
-  mounted () {
   }
 }
 </script>

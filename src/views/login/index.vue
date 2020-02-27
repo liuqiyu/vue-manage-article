@@ -66,20 +66,21 @@ export default {
   },
   methods: {
     submitForm () {
-      this.$refs['ruleForm'].validate(async (valid) => {
-        if (valid) {
-          this.$store.dispatch('user/login', {
-            username: this.formData.username,
-            password: this.formData.password
-          }).then(res => {
-            this.$message.success('登录成功！')
-            this.$router.push({ path: this.redirect || '/' })
-          })
-        } else {
-          console.log('error submit!!')
-          return false
-        }
-      })
+      this.$router.push({ path: this.redirect || '/' })
+      // this.$refs['ruleForm'].validate(async (valid) => {
+      //   if (valid) {
+      //     this.$store.dispatch('user/login', {
+      //       username: this.formData.username,
+      //       password: this.formData.password
+      //     }).then(res => {
+      //       this.$message.success('登录成功！')
+      //       this.$router.push({ path: this.redirect || '/' })
+      //     })
+      //   } else {
+      //     console.log('error submit!!')
+      //     return false
+      //   }
+      // })
     }
   }
 }
