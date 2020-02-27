@@ -4,7 +4,7 @@
       <el-form :model="ruleForm"
                :rules="rules"
                ref="ruleForm"
-               label-width="60px"
+               label-width="70px"
                class="demo-ruleForm">
         <el-form-item label="标题 "
                       prop="name">
@@ -17,6 +17,11 @@
                     v-model="ruleForm.description"
                     maxlength="30"
                     :disabled="!isEdit"></el-input>
+        </el-form-item>
+        <el-form-item label="创建时间"
+                      prop="create_date">
+          <el-input v-model="ruleForm.create_date"
+                    disabled="true"></el-input>
         </el-form-item>
       </el-form>
     </div>
@@ -34,6 +39,7 @@
 </template>
 
 <script>
+import moment from 'moment'
 export default {
   name: 'detail',
   props: {
@@ -67,6 +73,7 @@ export default {
             id: this.dialogData.id
           }
         })
+        res.create_date = moment(res.create_date).format('YYYY-MM-DD HH:mm:ss')
         Object.assign(this.ruleForm, res)
       } catch (e) {
         console.log(e)

@@ -17,6 +17,7 @@
 </template>
 
 <script>
+import moment from 'moment'
 import create from './create'
 import detail from './detail'
 export default {
@@ -65,7 +66,13 @@ export default {
           disabled: () => {
             return !this.multipleSelection.length > 0
           },
-          func: () => this.handleDel()
+          func: () => {
+            let arr = []
+            this.multipleSelection.forEach(item => {
+              arr.push(item.id)
+            })
+            this.handleDelete(arr.join())
+          }
         }
       ],
       tables: {
@@ -79,8 +86,6 @@ export default {
           // 选中后操作
           selectionChange: row => {
             this.multipleSelection = row
-            // console.log('选中', this.multipleSelection)
-            // if (row.length > 0)
           }
         },
         columns: [
@@ -92,11 +97,15 @@ export default {
           {
             label: '描述',
             key: 'description',
-            width: '180'
+            width: '380'
           },
           {
             label: '创建时间',
             key: 'create_date'
+          },
+          {
+            label: '最后修改时间',
+            key: 'update_date'
           }
         ],
         operation: {
@@ -115,9 +124,19 @@ export default {
               label: '删除',
               // icon: 'iconfont iconwenjian',
               // type: 'icon', // icon 只是图标
-              func: row => this.handleDelete(row) // 回调
+              func: row => {
+                this.handleDelete(row.id)
+              }
             }
           ]
+        },
+        formatter: {
+          create_date: (row) => {
+            return moment(row.create_date).format('YYYY-MM-DD HH:mm:ss')
+          },
+          update_date: (row) => {
+            return moment(row.update_date).format('YYYY-MM-DD HH:mm:ss')
+          }
         }
       },
       multipleSelection: []
@@ -129,7 +148,7 @@ export default {
       this.showDynamicDialog('create', '新增', '600px')
     },
     // 删除
-    handleDelete (row) {
+    handleDelete (id) {
       this.$confirm('此操作将永久删除该文件, 是否继续?', '提示', {
         confirmButtonText: '确定',
         cancelButtonText: '取消',
@@ -137,7 +156,7 @@ export default {
       }).then(() => {
         this.$http.delete('/article/delete', {
           data: {
-            id: row.id
+            id
           }
         })
         this.$message({
