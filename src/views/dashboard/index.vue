@@ -153,8 +153,8 @@ export default {
         confirmButtonText: '确定',
         cancelButtonText: '取消',
         type: 'warning'
-      }).then(() => {
-        this.$http.delete('/article/delete', {
+      }).then(async () => {
+        await this.$http.delete('/article/delete', {
           data: {
             id
           }

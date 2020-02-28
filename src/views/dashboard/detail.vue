@@ -11,7 +11,7 @@
           <el-input v-model="ruleForm.name"
                     :disabled="!isEdit"></el-input>
         </el-form-item>
-        <el-form-item label="昵称"
+        <el-form-item label="描述"
                       prop="description">
           <el-input type="textarea"
                     v-model="ruleForm.description"
@@ -21,7 +21,7 @@
         <el-form-item label="创建时间"
                       prop="create_date">
           <el-input v-model="ruleForm.create_date"
-                    disabled="true"></el-input>
+                    :disabled="true"></el-input>
         </el-form-item>
       </el-form>
     </div>
