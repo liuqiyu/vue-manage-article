@@ -101,11 +101,13 @@ export default {
           },
           {
             label: '创建时间',
-            key: 'create_date'
+            key: 'create_date',
+            sort: true
           },
           {
             label: '最后修改时间',
-            key: 'update_date'
+            key: 'update_date',
+            sort: true
           }
         ],
         operation: {
